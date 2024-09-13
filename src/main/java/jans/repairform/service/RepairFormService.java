@@ -1,7 +1,6 @@
 package jans.repairform.service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,7 @@ public class RepairFormService {
         newData.setDiambilNama(form.getDiambilNama());
         newData.setDiambilBhg(form.getDiambilBhg());
         newData.setDiambilTarikh(form.getDiambilTarikh());
-        newData.setMasalah(form.getMasalah());
+        newData.setMasalahPemohon(form.getMasalahPemohon());
         newData.setPenerimaNama(form.getPenerimaNama());
         newData.setPenerimaTarikh(form.getPenerimaTarikh());
         newData.setJuruteknikNama(form.getJuruteknikNama());
