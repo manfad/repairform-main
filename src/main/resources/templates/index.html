@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Repair Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <style>
+        .form-label-sm {
+            font-size: 0.875rem;
+        }
+        .form-control-sm {
+            height: calc(1.5em + 0.5rem + 2px);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <div class="navbar-collapse justify-content-center">
+                    <a class="navbar-brand" href="#">BORANG</a>
+                </div>
+                
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            USER
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="container mt-4">
+            <input type="text" id="searchBar" class="form-control mb-3" placeholder="Search for report">
+
+            <table class="table" id="reportTable" >
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Requester</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+            <div class="float-end" >
+
+            <!-- Button to trigger modal -->
+            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addReportModal">
+                Add New Report
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="addReportModal" tabindex="-1" aria-labelledby="addReportModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addReportModalLabel">Borang Baharu</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="card mb-3">
+                                <div class="card-header" id="incidentInfoHeader">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">MAKLUMAT BORANG</h5>
+                                        <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#incidentInfoCollapse" aria-expanded="true" aria-controls="incidentInfoCollapse" @click="toggleCollapseOne">
+                                            {{ collapseOne ? 'Hide' : 'Show' }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="incidentInfoCollapse" class="collapse show" aria-labelledby="incidentInfoHeader">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="incidentNo" class="form-label form-label-sm">Incident No</label>
+                                                <input type="text" class="form-control form-control-sm" id="incidentNo" v-model="incidentNo">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="incidentType" class="form-label form-label-sm">Incident Type</label>
+                                                <input type="text" class="form-control form-control-sm" id="incidentType" v-model="incidentType">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="incidentDate" class="form-label form-label-sm">Incident Date</label>
+                                                <input type="date" class="form-control form-control-sm" id="incidentDate" v-model="incidentDate">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="quotationNo" class="form-label form-label-sm">Quotation No</label>
+                                                <input type="text" class="form-control form-control-sm" id="quotationNo" v-model="quotationNo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-header" id="equipmentInfoHeader">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">PENERIMA LAPORAN</h5>
+                                        <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#equipmentInfoCollapse" aria-expanded="false" aria-controls="equipmentInfoCollapse" @click="toggleCollapseTwo">
+                                            {{ collapseTwo ? 'Show' : 'Hide' }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="equipmentInfoCollapse" class="collapse" aria-labelledby="equipmentInfoHeader">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3"> 
+                                                <label for="modelPeralatan" class="form-label form-label-sm">Model Peralatan</label>
+                                                <input type="text" class="form-control form-control-sm" id="modelPeralatan" v-model="modelPeralatan">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="noSiri" class="form-label form-label-sm">No Siri</label>
+                                                <input type="text" class="form-control form-control-sm" id="noSiri" v-model="noSiri">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="diserahNama" class="form-label form-label-sm">Diserah Nama</label>
+                                                <input type="text" class="form-control form-control-sm" id="diserahNama" v-model="diserahNama">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="diserahBhg" class="form-label form-label-sm">Diserah Bhg</label>
+                                                <input type="text" class="form-control form-control-sm" id="diserahBhg" v-model="diserahBhg">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="diserahTarikh" class="form-label form-label-sm">Diserah Tarikh</label>
+                                                <input type="date" class="form-control form-control-sm" id="diserahTarikh" v-model="diserahTarikh">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="diambilNama" class="form-label form-label-sm">Diambil Nama</label>
+                                                <input type="text" class="form-control form-control-sm" id="diambilNama" v-model="diambilNama">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="diambilBhg" class="form-label form-label-sm">Diambil Bhg</label>
+                                                <input type="text" class="form-control form-control-sm" id="diambilBhg" v-model="diambilBhg">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="diambilTarikh" class="form-label form-label-sm">Diambil Tarikh</label>
+                                                <input type="date" class="form-control form-control-sm" id="diambilTarikh" v-model="diambilTarikh">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="masalah" class="form-label form-label-sm">Masalah</label>
+                                                <textarea class="form-control form-control-sm" id="masalah" v-model="masalah"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="penerimaNama" class="form-label form-label-sm">Penerima Nama</label>
+                                                <input type="text" class="form-control form-control-sm" id="penerimaNama" v-model="penerimaNama">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="penerimaTarikh" class="form-label form-label-sm">Penerima Tarikh</label>
+                                                <input type="date" class="form-control form-control-sm" id="penerimaTarikh" v-model="penerimaTarikh">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">JURUTEKNIK</h5>
+                                    <button class="btn btn-secondary btn-sm" type="button" @click="toggleCollapseThree" data-bs-toggle="collapse" data-bs-target="#juruteknikCollapse" aria-expanded="false" aria-controls="juruteknikCollapse">
+                                        {{ collapseThree ? 'Show' : 'Hide' }}
+                                    </button>
+                                </div>
+                                <div class="collapse" id="juruteknikCollapse">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="juruteknikNama" class="form-label form-label-sm">Juruteknik Nama</label>
+                                                <input type="text" class="form-control form-control-sm" id="juruteknikNama" v-model="juruteknikNama">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="juruteknikTarikh" class="form-label form-label-sm">Juruteknik Tarikh</label>
+                                                <input type="date" class="form-control form-control-sm" id="juruteknikTarikh" v-model="juruteknikTarikh">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="juruteknikMasalah" class="form-label form-label-sm">Juruteknik Masalah</label>
+                                                <textarea class="form-control form-control-sm" id="juruteknikMasalah" v-model="juruteknikMasalah"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="juruteknikCara" class="form-label form-label-sm">Juruteknik Cara</label>
+                                                <textarea class="form-control form-control-sm" id="juruteknikCara" v-model="juruteknikCara"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                <label for="juruteknikOs" class="form-label form-label-sm">Juruteknik OS</label>
+                                                <input type="text" class="form-control form-control-sm" id="juruteknikOs" v-model="juruteknikOs">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="juruteknikCpu" class="form-label form-label-sm">Juruteknik CPU</label>
+                                                <input type="text" class="form-control form-control-sm" id="juruteknikCpu" v-model="juruteknikCpu">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="juruteknikRam" class="form-label form-label-sm">Juruteknik RAM</label>
+                                                <input type="text" class="form-control form-control-sm" id="juruteknikRam" v-model="juruteknikRam">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="juruteknikHdd" class="form-label form-label-sm">Juruteknik HDD</label>
+                                                <input type="text" class="form-control form-control-sm" id="juruteknikHdd" v-model="juruteknikHdd">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="ipOri" class="form-label form-label-sm">IP Original</label>
+                                                <input type="text" class="form-control form-control-sm" id="ipOri" v-model="ipOri">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="ipAfter" class="form-label form-label-sm">IP After</label>
+                                                <input type="text" class="form-control form-control-sm" id="ipAfter" v-model="ipAfter">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="ipDitukar" v-model="ipDitukar">
+                                                    <label class="form-check-label" for="ipDitukar">IP Ditukar</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-3">
+                                <div class="card-header" id="receivedReturnedInfoHeader">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">SYARIKAT PEMBEKAL</h5>
+                                        <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#receivedReturnedInfoCollapse" aria-expanded="false" aria-controls="receivedReturnedInfoCollapse" @click="toggleCollapseFour">
+                                            {{ collapseFour ? 'Show' : 'Hide' }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="receivedReturnedInfoCollapse" class="collapse" aria-labelledby="receivedReturnedInfoHeader">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="diterimaNama" class="form-label form-label-sm">Diterima Nama</label>
+                                                <input type="text" class="form-control form-control-sm" id="diterimaNama" v-model="diterimaNama">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="diterimaSyarikat" class="form-label form-label-sm">Diterima Syarikat</label>
+                                                <input type="text" class="form-control form-control-sm" id="diterimaSyarikat" v-model="diterimaSyarikat">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="diterimaTarikh" class="form-label form-label-sm">Diterima Tarikh</label>
+                                                <label for="diterimaTarikh" class="form-label">Diterima Tarikh</label>
+                                                <input type="date" class="form-control" id="diterimaTarikh" v-model="diterimaTarikh">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="dikembaliNama" class="form-label">Dikembali Nama</label>
+                                                <input type="text" class="form-control" id="dikembaliNama" v-model="dikembaliNama">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="dikembaliSyarikat" class="form-label">Dikembali Syarikat</label>
+                                                <input type="text" class="form-control" id="dikembaliSyarikat" v-model="dikembaliSyarikat">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="dikembaliTarikh" class="form-label">Dikembali Tarikh</label>
+                                                <input type="date" class="form-control" id="dikembaliTarikh" v-model="dikembaliTarikh">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-header" id="officerInfoHeader">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">PEGAWAI PEMERIKSA</h5>
+                                        <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#officerInfoCollapse" aria-expanded="false" aria-controls="officerInfoCollapse" @click="toggleCollapseFive">
+                                            {{ collapseFive ? 'Show' : 'Hide' }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="officerInfoCollapse" class="collapse" aria-labelledby="officerInfoHeader">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="pegawaiNama" class="form-label">Pegawai Nama</label>
+                                                <input type="text" class="form-control" id="pegawaiNama" v-model="pegawaiNama">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="pegawaiTarikh" class="form-label">Pegawai Tarikh</label>
+                                                <input type="date" class="form-control" id="pegawaiTarikh" v-model="pegawaiTarikh">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" @click="save">Save Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="pdfModalLabel">PDF Report</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <iframe id="pdfFrame" width="100%" height="600px" frameborder="0"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.js"></script>
+
+    <script>
+        $(document).ready(function() {
+        
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    status: '',
+                    incidentNo: '',
+                    incidentDate: '',
+                    incidentType: '',
+                    quotationNo: '',
+                    modelPeralatan: '',
+                    noSiri: '',
+                    diserahNama: '',
+                    diserahBhg: '',
+                    diserahTarikh: '',
+                    diambilNama: '',
+                    diambilBhg: '',
+                    diambilTarikh: '',
+                    masalah: '',
+                    penerimaNama: '',
+                    penerimaTarikh: '',
+                    juruteknikNama: '',
+                    juruteknikTarikh: '',
+                    juruteknikMasalah: '',
+                    juruteknikCara: '',
+                    juruteknikOs: '',
+                    juruteknikCpu: '',
+                    juruteknikRam: '',
+                    juruteknikHdd: '',
+                    ipOri: '',
+                    ipAfter: '',
+                    ipDitukar: '',
+                    diterimaNama: '',
+                    diterimaSyarikat: '',
+                    diterimaTarikh: '',
+                    dikembaliNama: '',
+                    dikembaliSyarikat: '',
+                    dikembaliTarikh: '',
+                    pegawaiNama: '',
+                    pegawaiTarikh: '',
+                    collapseOne: true,
+                    collapseTwo: true,
+                    collapseThree: true,
+                    collapseFour: true,
+                    collapseFive: true
+                }
+            },mounted(){
+                this.fetchRecord();
+                $('#openPdfButton').on('click', this.openPdfModal);
+
+            },
+            methods:{
+                toggleCollapseOne() {
+                    this.collapseOne = !this.collapseOne;
+                },
+                toggleCollapseTwo() {
+                    this.collapseTwo = !this.collapseTwo;
+                },
+                toggleCollapseThree() {
+                    this.collapseThree = !this.collapseThree;
+                },
+                toggleCollapseFour() {
+                    this.collapseFour = !this.collapseFour;
+                },
+                toggleCollapseFive() {
+                    this.collapseFive = !this.collapseFive;
+                },
+                fetchRecord() {
+                    let reportTable = $('#reportTable').DataTable({
+                        "searching": false,
+                        "destroy": true,
+                        "processing": true,
+                        "serverSide": true,
+                        "scrollResize": true,
+                        "scrollY": 300,
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "pageLength": 100,
+                        "select": "single",
+                        "ajax": {
+                            "type": "GET",
+                            "url": `[[@{/repairform/fetch}]]`,
+                            "contentType": "application/json; charset=utf-8",
+                        },
+                        "columns": [
+                            { "data": "incidentNo" },
+                            { "data": "incidentDate" },
+                            { "data": "diterimaNama" },
+                            {
+                                "data": null,
+                                "render": function (data, type, row) {
+                                    return `<button class="btn btn-sm btn-primary" @click="editReport('${row.formId}')">Edit</button>
+                                            <button class="btn btn-sm btn-danger" @click="deleteForm('${row.formId}')">Delete</button>
+                                            <button class="btn btn-sm btn-secondary" @click="printForm('${row.formId}')">Print</button>`;
+                                }
+                            }
+                        ]
+                    });
+
+                    reportTable.on('click', 'button.btn-primary', (event) => {
+                        event.preventDefault();
+                        const data = reportTable.row($(event.target).closest('tr')).data();
+                        console.log('edit ' + data.formId);
+                    });
+                    reportTable.on('click', 'button.btn-danger', (event) => {
+                        event.preventDefault();
+                        const data = reportTable.row($(event.target).closest('tr')).data();
+                        console.log('delete ' + data.formId);
+                        this.deleteForm(data.formId);
+                    });
+
+                    reportTable.on('click', 'button.btn-secondary', (event) => {
+                        event.preventDefault();
+                        const data = reportTable.row($(event.target).closest('tr')).data();
+                        console.log('print ' + data.formId);
+                        this.openPdfModal();
+                    });
+                },
+                save(){
+                    var data={
+                        status: this.status,
+                        incidentNo: this.incidentNo,
+                        incidentDate: this.incidentDate,
+                        incidentType: this.incidentType,
+                        quotationNo: this.quotationNo,
+                        modelPeralatan: this.modelPeralatan,
+                        noSiri: this.noSiri,
+                        diserahNama: this.diserahNama,
+                        diserahBhg: this.diserahBhg,
+                        diserahTarikh: this.diserahTarikh,
+                        diambilNama: this.diambilNama,
+                        diambilBhg: this.diambilBhg,
+                        diambilTarikh: this.diambilTarikh,
+                        masalah: this.masalah,
+                        penerimaNama: this.penerimaNama,
+                        penerimaTarikh: this.penerimaTarikh,
+                        juruteknikNama: this.juruteknikNama,
+                        juruteknikTarikh: this.juruteknikTarikh,
+                        juruteknikMasalah: this.juruteknikMasalah,
+                        juruteknikCara: this.juruteknikCara,
+                        juruteknikOs: this.juruteknikOs,
+                        juruteknikCpu: this.juruteknikCpu,
+                        juruteknikRam: this.juruteknikRam,
+                        juruteknikHdd: this.juruteknikHdd,
+                        ipOri: this.ipOri,
+                        ipAfter: this.ipAfter,
+                        ipDitukar: this.ipDitukar,
+                        diterimaNama: this.diterimaNama,
+                        diterimaSyarikat: this.diterimaSyarikat,
+                        diterimaTarikh: this.diterimaTarikh,
+                        dikembaliNama: this.dikembaliNama,
+                        dikembaliSyarikat: this.dikembaliSyarikat,
+                        dikembaliTarikh: this.dikembaliTarikh,
+                        pegawaiNama: this.pegawaiNama,
+                        pegawaiTarikh: this.pegawaiTarikh,
+                    }
+                    $.post({
+                      url: `[[@{/repairform/save}]]`,
+                      data: JSON.stringify(data),
+                      dataType: "json",
+                      contentType: "application/json; charset=utf-8",
+                      success: function (res) {
+                        window.location.reload();
+                      }}
+                    )
+                   
+                },
+                edit(){
+                    var data={
+                        rptnum : this.rptnum,
+                        title: this.title,
+                        requser: this.requser
+                    }
+                    $.post({
+                      url: `[[@{/repairform/save}]]`,
+                      data: JSON.stringify(data),
+                      dataType: "json",
+                      contentType: "application/json; charset=utf-8",
+                      success: function (res) {
+                        window.location.reload();
+                      }}
+                    )
+                   
+                },
+                deleteForm(id){
+                    console.log("delete " + id);
+                    $.post({
+                      url: `[[@{/repairform/delete}]]?param=` + id,
+                      dataType: "json",
+                      contentType: "application/json; charset=utf-8",
+                      success: function (res) {
+                        window.location.reload();
+                      }}
+                    )
+                },
+                pdf(){
+                    window.open(`[[@{/repairform/report}]]`, "_blank");
+                },
+                openPdfModal() {
+                    $.ajax({
+                        url: '[[@{/repairform/preview}]]',
+                        method: 'GET',
+                        success: (response) => {
+                            if (response && response.pdfUrl) {
+                                $('#pdfFrame').attr('src', response.pdfUrl);
+                                $('#pdfModal').modal('show');
+                            } else {
+                                console.error('Invalid response from server');
+                                alert('Error loading PDF preview');
+                            }
+                        },
+                        error: (error) => {
+                            console.error('Error fetching PDF URL:', error);
+                            alert('Error loading PDF preview2');
+                        }
+                    });
+                }
+                
+            },
+            
+        });
+        app.mount('#app');
+    });
+    </script>
+</body>
+</html>

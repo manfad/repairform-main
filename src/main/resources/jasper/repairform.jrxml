@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repairform" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9907ae37-65bd-42c4-95b0-f0533ace020b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="581" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement x="1" y="-12" width="531" height="582" uuid="a2ebd698-4ed3-4fe5-8571-2d85955626a5">
+					<property name="com.jaspersoft.studio.layout"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<staticText>
+					<reportElement x="11" y="1" width="123" height="29" uuid="d6e89ad5-5eb8-4f55-8763-6350c1d6cb99"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[TELEFON : 088-232364
+
+RUJUKAN : JANS/HQ/TM:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="391" y="2" width="140" height="50" uuid="a1f48b1d-473b-4180-95e0-9d144b6839bb"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[CAWANGAN TEKNOLOGI MAKLUMAT
+JABATAN AIR NEGERI SABAH
+LOT 1-3, TINGKAT BAWAH
+BLOK B, WISMA MUIS
+KOTA KINABALU, SABAH.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="12" y="71" width="98" height="9" uuid="6438c9e5-b23f-4e92-919c-f6fce12cfacb"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[BUTIR-BUTIR PERALATAN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="13" y="81" width="123" height="19" uuid="9bf6c017-149c-479e-9c55-36939364d8d9"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[Jenis / Model Peralatan	:
+No . Siri/ Inventori (JANS)	:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="13" y="100" width="83" height="10" uuid="4e025dd6-d112-4acd-a78d-b93f4eeda731"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[DIISI OLEH PEMOHON]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="97" y="101" width="83" height="10" uuid="85866269-d693-4d9b-822f-c5e991c5a341"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[(PELAPOR MASALAH)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="13" y="111" width="83" height="14" uuid="50475b04-9344-40f6-a783-b48bc3b13416"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[DISERAH OLEH -]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="15" y="161" width="179" height="9" uuid="dfa142fd-2fa3-4fd4-90ef-db039d2fecbf"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Masalah yang dilaporkan oleh PEMOHON:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="294" y="111" width="83" height="14" uuid="a21a1ccf-b064-4822-a96e-3db23adf3465"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[DIAMBIL-BALIK OLEH -]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="293" y="131" width="83" height="9" uuid="d3aa3a68-a510-4298-8601-8d02b6619010"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Nama		:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="293" y="141" width="83" height="9" uuid="118beafd-7845-4446-9b5f-0080f4724285"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Bhg / Daerah	:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="293" y="151" width="83" height="9" uuid="b6f74b58-8429-4f13-a214-4df24708240a"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Tarikh		:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="13" y="201" width="117" height="9" uuid="5e03cee4-e816-43a6-94d5-cf8e1bec4366"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[DIISI OLEH PENERIMA LAPORAN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="131" y="201" width="149" height="9" uuid="3f99631d-f9c9-445d-a6c4-7d42ead44c3a"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[(CAWANGAN TEKNOLOGI MAKLUMAT)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="211" width="83" height="9" uuid="7cb0a41e-59f1-4889-9bb1-334cdcfa8188"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Nama	:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="295" y="211" width="83" height="9" uuid="a9c12e08-2a65-463f-83a9-48df6f956698"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Tarikh	:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="220" width="528" height="1" uuid="9123e488-523e-484c-8c74-aa872f041c01"/>
+				</line>
+				<staticText>
+					<reportElement x="195" y="221" width="143" height="10" uuid="107bed27-b1c2-4c5f-997f-2d1ba544d7e5"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[(CAWANGAN TEKNOLOGI MAKLUMAT)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="12" y="221" width="182" height="9" uuid="47aa1d5c-7881-4461-b10a-a9f953979e53"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[DIISI OLEH JURUTEKNIK BHG. PENYELENGGARAAN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="11" y="251" width="83" height="9" uuid="f947667a-ae64-4f1e-8dc2-27e112fd1d5f"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Nama	:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="295" y="262" width="83" height="9" uuid="ccda609a-ab09-40c6-9a8e-7eb5cc861610"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Tarikh	:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="11" y="261" width="156" height="9" uuid="537d1b75-0ee6-48c0-8558-15d4dc3cdaab"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Masalah yang disahkan oleh JURUTEKNIK:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="12" y="301" width="156" height="9" uuid="e1388cce-e054-484c-9e4b-df5b9c7534e3"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Cara penyelesaian yang diambil:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="315" y="301" width="156" height="9" uuid="90b2b694-495d-4abb-bce8-2e0310bfc8ca"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Operating System	:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="315" y="311" width="156" height="9" uuid="9be77f90-456f-42ea-a908-7283ae6ab08c"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Processor		:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="315" y="321" width="156" height="9" uuid="3b105f07-1a0f-4561-b5d3-4dc35b95febc"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[RAM		:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="315" y="331" width="156" height="9" uuid="23246d61-0e47-4970-9004-899f044f5313"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Hard Disk		:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="361" width="156" height="9" uuid="d60a2ec4-711f-464b-bfc4-514969b44927"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[IP Address (ASAL / Original)	:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="371" width="156" height="9" uuid="856db205-14c1-41d4-bb6a-8072eba9e206"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[IP Address (KINI / After Service)	:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="381" width="156" height="9" uuid="dccf4070-7ab3-49d8-8889-3615ccb114f1"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[GATEWAY IP yang ASAL ditukar kembali?]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="241" y="381" width="19" height="9" uuid="f22a3466-9875-41f9-a098-4276f11dadae"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[YA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="311" y="381" width="23" height="9" uuid="3d50e721-9f58-44db-8806-40515a0a4faf"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[TIDAK]]></text>
+				</staticText>
+				<line>
+					<reportElement x="2" y="390" width="529" height="1" uuid="d29f2a01-447f-4ecb-9849-7413fd12e450"/>
+				</line>
+				<staticText>
+					<reportElement x="233" y="432" width="112" height="9" uuid="25585e70-df9f-4d13-95f0-2d886af50440"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[(VENDOR / SERVICE CENTER)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="392" width="213" height="9" uuid="47193216-3ad4-46b8-ab9d-e7fc79865aa8"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[DIISI OLEH SYARIKAT PEMBEKAL / PUSAT PEMBAIKAN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="452" width="83" height="10" uuid="008dfa31-fbbf-4783-a2d3-b31e91c32056"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[DITERIMA OLEH -]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="354" y="502" width="83" height="10" uuid="da3bec8b-d3e7-4b9e-a3ab-fc29872c9df0"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Syarikat		:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="354" y="491" width="83" height="10" uuid="d6af3ff9-0a9e-4d14-a7ce-6ee600b3415d"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Nama		:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="355" y="453" width="83" height="9" uuid="5675bd73-0747-49a0-a1a9-dec594dc1265"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[DIKEMBALI OLEH -]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="354" y="513" width="83" height="10" uuid="4a1808b3-68f5-44c2-bd46-c1b58b76db8d"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Tarikh		:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="3" y="525" width="527" height="1" uuid="f3a78826-21e2-4358-8682-d9b0ee109bfb"/>
+				</line>
+				<staticText>
+					<reportElement x="12" y="524" width="118" height="9" uuid="11148e04-b4ab-4c54-9181-f1459377625b"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[DIISI OLEH PENERIMA LAPORAN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="131" y="525" width="143" height="9" uuid="c459d399-4bfa-4343-a28e-2c92f657ed1c"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[(CAWANGAN TEKNOLOGI MAKLUMAT)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="12" y="561" width="83" height="9" uuid="6abbc5d9-6937-4ba6-ad7a-40c4b9bc6a03"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Nama	:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="292" y="561" width="83" height="10" uuid="1ddd56a9-4190-4f48-9a8f-bb93ab6eda71"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Tarikh	:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="12" y="572" width="152" height="10" uuid="29d9f5ed-05f0-4147-9ebc-b952cb168e5c"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Catatan ke atas peralatan yang telah dibaiki:]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="2" y="51" width="529" height="19" backcolor="#2667BD" uuid="0e91c0ad-d003-418c-ae82-36ddcb78158d"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="86" y="53" width="412" height="17" uuid="220f0be1-a0fd-4e07-a04e-c9846a207408"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[BORANG PENERIMAAN PERALATAN YANG ROSAK ATAU PERLU DIBAIKI]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="132" width="83" height="9" uuid="dc77abd0-a1f5-46db-85d6-ff6543eabdec"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Nama		:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="142" width="83" height="9" uuid="d40d17d1-0573-4806-b000-7599beecd5f3"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Bhg / Daerah	:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="152" width="83" height="9" uuid="15c6b322-4247-414c-b878-c702c589e41c"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Tarikh		:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="513" width="83" height="10" uuid="b9acf5e1-7460-4856-aec0-feccb30036fe"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Tarikh		:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="491" width="83" height="10" uuid="c1ad8fd6-48fc-40a1-8fab-8c34e9ece525"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Nama		:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="502" width="83" height="10" uuid="fb88f356-1406-4c97-a350-94e08ae90056"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Syarikat		:]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>
