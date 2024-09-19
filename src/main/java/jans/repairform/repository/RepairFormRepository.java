@@ -7,7 +7,7 @@ import jans.repairform.model.RepairForm;
 
 
 @Repository
-public interface RepairFormRepository extends JpaRepository<RepairForm,Long>{
+public interface RepairFormRepository extends JpaRepository<RepairForm,Integer>{
     
     RepairForm findByFormId(Integer formId);
 }

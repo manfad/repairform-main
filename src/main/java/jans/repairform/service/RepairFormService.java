@@ -19,11 +19,13 @@ public class RepairFormService {
         return repo.findAll();      
     }
 
+   
     public Response save(RepairForm form){
         System.out.println("123");
         Response res = new Response();
         RepairForm newData = new RepairForm();
         newData.setStatus(form.getStatus());
+        newData.setCreatedDate(LocalDate.now());
         newData.setIncidentNo(form.getIncidentNo());
         newData.setIncidentDate(LocalDate.now());
         newData.setIncidentType(form.getIncidentType());
@@ -63,7 +65,21 @@ public class RepairFormService {
         res.setSuccess(true);
         return res;
     }
+    public Response complete(Integer param){
+        Response res = new Response();
+        
+        RepairForm form = repo.findByFormId(param);
 
+        if(form != null){
+            form.setStatus("C");
+            repo.save(form);
+            res.setMessage("Succesfully");
+            res.setSuccess(true);
+        }else{
+            res.setMessage("Form is not found");
+        }
+        return res;
+    }
     public Response delete(Integer param){
         Response res = new Response();
         

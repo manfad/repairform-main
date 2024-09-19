@@ -25,11 +25,11 @@
                 <div class="navbar-collapse justify-content-center">
                     <a class="navbar-brand" href="#">BORANG</a>
                 </div>
-                
+
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            USER
+                            <span th:text="${name}">[name]</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Logout</a></li>
@@ -75,7 +75,7 @@
                                 <div class="card-header" id="incidentInfoHeader">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h5 class="mb-0">MAKLUMAT BORANG</h5>
-                                        <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#incidentInfoCollapse" aria-expanded="true" aria-controls="incidentInfoCollapse" @click="toggleCollapseOne">
+                                        <button class="btn btn-secondary btn-sm" type="button" @click="toggleCollapse('One')" data-bs-toggle="collapse" data-bs-target="#incidentInfoCollapse" aria-expanded="true" aria-controls="incidentInfoCollapse">
                                             {{ collapseOne ? 'Show' : 'Hide' }}
                                         </button>
                                     </div>
@@ -109,7 +109,7 @@
                                 <div class="card-header" id="equipmentInfoHeader">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h5 class="mb-0">PENERIMA LAPORAN</h5>
-                                        <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#equipmentInfoCollapse" aria-expanded="false" aria-controls="equipmentInfoCollapse" @click="toggleCollapseTwo">
+                                        <button class="btn btn-secondary btn-sm" type="button" @click="toggleCollapse('Two')" data-bs-toggle="collapse" data-bs-target="#equipmentInfoCollapse" aria-expanded="false" aria-controls="equipmentInfoCollapse">
                                             {{ collapseTwo ? 'Show' : 'Hide' }}
                                         </button>
                                     </div>
@@ -176,7 +176,7 @@
                             <div class="card mb-3">
                                 <div class="card-header d-flex justify-content-between align-items-center">
                                     <h5 class="mb-0">JURUTEKNIK</h5>
-                                    <button class="btn btn-secondary btn-sm" type="button" @click="toggleCollapseThree" data-bs-toggle="collapse" data-bs-target="#juruteknikCollapse" aria-expanded="false" aria-controls="juruteknikCollapse">
+                                    <button class="btn btn-secondary btn-sm" type="button" @click="toggleCollapse('Three')" data-bs-toggle="collapse" data-bs-target="#juruteknikCollapse" aria-expanded="false" aria-controls="juruteknikCollapse">
                                         {{ collapseThree ? 'Show' : 'Hide' }}
                                     </button>
                                 </div>
@@ -246,7 +246,7 @@
                                 <div class="card-header" id="receivedReturnedInfoHeader">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h5 class="mb-0">SYARIKAT PEMBEKAL</h5>
-                                        <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#receivedReturnedInfoCollapse" aria-expanded="false" aria-controls="receivedReturnedInfoCollapse" @click="toggleCollapseFour">
+                                        <button class="btn btn-secondary btn-sm" type="button" @click="toggleCollapse('Four')" data-bs-toggle="collapse" data-bs-target="#receivedReturnedInfoCollapse" aria-expanded="false" aria-controls="receivedReturnedInfoCollapse">
                                             {{ collapseFour ? 'Show' : 'Hide' }}
                                         </button>
                                     </div>
@@ -289,7 +289,7 @@
                                 <div class="card-header" id="officerInfoHeader">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h5 class="mb-0">PEGAWAI PEMERIKSA</h5>
-                                        <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#officerInfoCollapse" aria-expanded="false" aria-controls="officerInfoCollapse" @click="toggleCollapseFive">
+                                        <button class="btn btn-secondary btn-sm" type="button" @click="toggleCollapse('Five')" data-bs-toggle="collapse" data-bs-target="#officerInfoCollapse" aria-expanded="false" aria-controls="officerInfoCollapse">
                                             {{ collapseFive ? 'Show' : 'Hide' }}
                                         </button>
                                     </div>
@@ -381,6 +381,7 @@
                     dikembaliTarikh: '',
                     pegawaiNama: '',
                     pegawaiTarikh: '',
+                    createdDate:'',
                     collapseOne: false,
                     collapseTwo: true,
                     collapseThree: true,
@@ -393,20 +394,8 @@
 
             },
             methods:{
-                toggleCollapseOne() {
-                    this.collapseOne = !this.collapseOne;
-                },
-                toggleCollapseTwo() {
-                    this.collapseTwo = !this.collapseTwo;
-                },
-                toggleCollapseThree() {
-                    this.collapseThree = !this.collapseThree;
-                },
-                toggleCollapseFour() {
-                    this.collapseFour = !this.collapseFour;
-                },
-                toggleCollapseFive() {
-                    this.collapseFive = !this.collapseFive;
+                toggleCollapse(section) {
+                    this[`collapse${section}`] = !this[`collapse${section}`];
                 },
                 fetchRecord() {
                     let reportTable = $('#reportTable').DataTable({
@@ -434,12 +423,27 @@
                                 "render": function (data, type, row) {
                                     return `<button class="btn btn-sm btn-primary" @click="editReport('${row.formId}')">Edit</button>
                                             <button class="btn btn-sm btn-danger" @click="deleteForm('${row.formId}')">Delete</button>
-                                            <button class="btn btn-sm btn-secondary" @click="printForm('${row.formId}')">Print</button>`;
+                                            <button class="btn btn-sm btn-secondary" @click="printForm('${row.formId}')">Print</button>
+                                            ${data.status !== 'C' ? `<button class="btn btn-sm btn-success" @click="editReport('${row.formId}')">Complete</button>` : ''}`;
                                 }
                             }
-                        ]
+                        ],
+                        "rowCallback": function (row, data) {
+                            if (data.status === "C") {
+                                $(row).addClass('table-success');
+                            } else {
+                                if (new Date(data.createdDate).toDateString() === new Date().toDateString()) {
+                                    $(row).addClass('table-warning');
+                                }
+                            }
+                        }
                     });
-
+                    reportTable.on('click', 'button.btn-success', (event) => {
+                        event.preventDefault();
+                        const data = reportTable.row($(event.target).closest('tr')).data();
+                        console.log('complete ' + data.formId);
+                        this.completeForm(data.formId);
+                    });
                     reportTable.on('click', 'button.btn-primary', (event) => {
                         event.preventDefault();
                         const data = reportTable.row($(event.target).closest('tr')).data();
@@ -524,6 +528,17 @@
                       }}
                     )
                    
+                },
+                completeForm(id){
+                    console.log("complete " + id);
+                    $.post({
+                      url: `[[@{/repairform/complete}]]?param=` + id,
+                      dataType: "json",
+                      contentType: "application/json; charset=utf-8",
+                      success: function (res) {
+                        window.location.reload();
+                      }}
+                    )
                 },
                 deleteForm(id){
                     console.log("delete " + id);

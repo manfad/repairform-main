@@ -25,6 +25,9 @@ public class RepairForm {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "created_date")
+    private LocalDate createdDate;
+
     @Column(name = "incident_no")
     private String incidentNo;
 
