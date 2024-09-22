@@ -1,0 +1,53 @@
+CREATE TABLE `repairform` (
+  `form_id` int NOT NULL AUTO_INCREMENT,
+  `status` varchar(255) DEFAULT NULL,
+  `incident_no` varchar(255) DEFAULT NULL,
+  `incident_date` date DEFAULT NULL,
+  `incident_type` varchar(255) DEFAULT NULL,
+  `quotation_no` varchar(255) DEFAULT NULL,
+  `model_peralatan` varchar(255) DEFAULT NULL,
+  `no_siri` varchar(255) DEFAULT NULL,
+  `diserah_nama` varchar(255) DEFAULT NULL,
+  `diserah_bhg` varchar(255) DEFAULT NULL,
+  `diserah_tarikh` date DEFAULT NULL,
+  `diambil_nama` varchar(255) DEFAULT NULL,
+  `diambil_bhg` varchar(255) DEFAULT NULL,
+  `diambil_tarikh` date DEFAULT NULL,
+  `masalah_pemohon` varchar(255) DEFAULT NULL,
+  `penerima_nama` varchar(255) DEFAULT NULL,
+  `penerima_tarikh` date DEFAULT NULL,
+  `juruteknik_nama` varchar(255) DEFAULT NULL,
+  `juruteknik_tarikh` date DEFAULT NULL,
+  `juruteknik_masalah` varchar(255) DEFAULT NULL,
+  `juruteknik_cara` varchar(255) DEFAULT NULL,
+  `juruteknik_os` varchar(255) DEFAULT NULL,
+  `juruteknik_cpu` varchar(255) DEFAULT NULL,
+  `juruteknik_ram` varchar(255) DEFAULT NULL,
+  `juruteknik_hdd` varchar(255) DEFAULT NULL,
+  `ip_ori` varchar(255) DEFAULT NULL,
+  `ip_after` varchar(255) DEFAULT NULL,
+  `ip_ditukar` varchar(255) DEFAULT NULL,
+  `diterima_nama` varchar(255) DEFAULT NULL,
+  `diterima_syarikat` varchar(255) DEFAULT NULL,
+  `diterima_tarikh` date DEFAULT NULL,
+  `dikembali_nama` varchar(255) DEFAULT NULL,
+  `dikembali_syarikat` varchar(255) DEFAULT NULL,
+  `dikembali_tarikh` date DEFAULT NULL,
+  `pegawai_nama` varchar(255) DEFAULT NULL,
+  `pegawai_tarikh` date DEFAULT NULL,
+  `created_date` date DEFAULT NULL,
+  PRIMARY KEY (`form_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+INSERT INTO user (username, password, name)
+VALUES ('your_username', 'your_password', 'your_name');

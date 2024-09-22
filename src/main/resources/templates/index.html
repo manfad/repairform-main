@@ -40,9 +40,30 @@
         </nav>
         
         <div class="container mt-4">
-            <input type="text" id="searchBar" class="form-control mb-3" placeholder="Search for report">
-
-            <table class="table" id="reportTable" >
+            <div class="row">
+                <div class="col-auto">
+                    <!-- Dropdown Button -->
+                    <div class="dropdown">
+                        <button class="btn btn-warning dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filter
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                            <li><a class="dropdown-item" href="#">All</a></li>
+                            <li><a class="dropdown-item" href="#">New</a></li>
+                            <li><a class="dropdown-item" href="#">Completed</a></li>
+                            <li><a class="dropdown-item" href="#">Date</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <!-- Search Bar with Search Button -->
+                    <div class="input-group">
+                        <input type="text" id="searchBar" class="form-control" placeholder="Search for report">
+                        <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+                    </div>
+                </div>
+            </div>
+            <table class="table" id="reportTable"  >
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -85,7 +106,7 @@
                                         <div class="row">
                                             <div class="col-md-4 mb-3">
                                                 <label for="incidentNo" class="form-label form-label-sm">Incident No</label>
-                                                <input type="text" class="form-control form-control-sm" id="incidentNo" v-model="incidentNo">
+                                                <input type="text" class="form-control form-control-sm" id="incidentNo" v-model="incidentNo" ref="incidentNo">
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <label for="incidentType" class="form-label form-label-sm">Incident Type</label>
@@ -346,24 +367,25 @@
         const app = Vue.createApp({
             data() {
                 return {
+                    formId:'',
                     status: '',
                     incidentNo: '',
-                    incidentDate: '',
+                    incidentDate: new Date().toISOString().split('T')[0],
                     incidentType: '',
                     quotationNo: '',
                     modelPeralatan: '',
                     noSiri: '',
                     diserahNama: '',
                     diserahBhg: '',
-                    diserahTarikh: '',
+                    diserahTarikh: new Date().toISOString().split('T')[0],
                     diambilNama: '',
                     diambilBhg: '',
-                    diambilTarikh: '',
+                    diambilTarikh: new Date().toISOString().split('T')[0],
                     masalah: '',
                     penerimaNama: '',
-                    penerimaTarikh: '',
+                    penerimaTarikh: new Date().toISOString().split('T')[0],
                     juruteknikNama: '',
-                    juruteknikTarikh: '',
+                    juruteknikTarikh: new Date().toISOString().split('T')[0],
                     juruteknikMasalah: '',
                     juruteknikCara: '',
                     juruteknikOs: '',
@@ -375,12 +397,12 @@
                     ipDitukar: '',
                     diterimaNama: '',
                     diterimaSyarikat: '',
-                    diterimaTarikh: '',
+                    diterimaTarikh: new Date().toISOString().split('T')[0],
                     dikembaliNama: '',
                     dikembaliSyarikat: '',
-                    dikembaliTarikh: '',
+                    dikembaliTarikh: new Date().toISOString().split('T')[0],
                     pegawaiNama: '',
-                    pegawaiTarikh: '',
+                    pegawaiTarikh: new Date().toISOString().split('T')[0],
                     createdDate:'',
                     collapseOne: false,
                     collapseTwo: true,
@@ -399,15 +421,16 @@
                 },
                 fetchRecord() {
                     let reportTable = $('#reportTable').DataTable({
-                        "searching": false,
                         "destroy": true,
+                        "autowidth": false,
+                        "searching": false,
+                        "lengthChange": false,
+                        "paging": true,
+                        "info": true,
+                        "pageLength": 100,
                         "processing": true,
                         "serverSide": true,
-                        "scrollResize": true,
-                        "scrollY": 300,
-                        "scrollCollapse": true,
-                        "paging": false,
-                        "pageLength": 100,
+                        "ordering": true,
                         "select": "single",
                         "ajax": {
                             "type": "GET",
@@ -421,7 +444,7 @@
                             {
                                 "data": null,
                                 "render": function (data, type, row) {
-                                    return `<button class="btn btn-sm btn-primary" @click="editReport('${row.formId}')">Edit</button>
+                                    return `<button class="btn btn-sm btn-primary" @click="editForm('${row.formId}')">Edit</button>
                                             <button class="btn btn-sm btn-danger" @click="deleteForm('${row.formId}')">Delete</button>
                                             <button class="btn btn-sm btn-secondary" @click="printForm('${row.formId}')">Print</button>
                                             ${data.status !== 'C' ? `<button class="btn btn-sm btn-success" @click="editReport('${row.formId}')">Complete</button>` : ''}`;
@@ -448,6 +471,7 @@
                         event.preventDefault();
                         const data = reportTable.row($(event.target).closest('tr')).data();
                         console.log('edit ' + data.formId);
+                        this.editForm(data.formId);
                     });
                     reportTable.on('click', 'button.btn-danger', (event) => {
                         event.preventDefault();
@@ -465,7 +489,7 @@
                 },
                 save(){
                     var data={
-                        status: this.status,
+                        formId : this.formId,
                         incidentNo: this.incidentNo,
                         incidentDate: this.incidentDate,
                         incidentType: this.incidentType,
@@ -512,26 +536,60 @@
                     )
                    
                 },
-                edit(){
-                    var data={
-                        rptnum : this.rptnum,
-                        title: this.title,
-                        requser: this.requser
-                    }
-                    $.post({
-                      url: `[[@{/repairform/save}]]`,
-                      data: JSON.stringify(data),
+                editForm(id){
+                    let self = this;
+                    $.get({
+                      url: `[[@{/repairform/getDetail}]]?param=` + id,
                       dataType: "json",
                       contentType: "application/json; charset=utf-8",
                       success: function (res) {
-                        window.location.reload();
+                        console.log(res);
+                        $('#addReportModal').modal('show');
+
+                        console.log(this.incidentNo);
+                        self.incidentNo = res.incidentNo;
+                        self.incidentDate = res.incidentDate;
+                        self.incidentType = res.incidentType;
+                        self.quotationNo = res.quotationNo;
+                        self.modelPeralatan = res.modelPeralatan;
+                        self.noSiri = res.noSiri;
+                        self.diserahNama = res.diserahNama;
+                        self.diserahBhg = res.diserahBhg;
+                        self.diserahTarikh = res.diserahTarikh;
+                        self.diambilNama = res.diambilNama;
+                        self.diambilBhg = res.diambilBhg;
+                        self.diambilTarikh = res.diambilTarikh;
+                        self.masalah = res.masalah;
+                        self.penerimaNama = res.penerimaNama;
+                        self.penerimaTarikh = res.penerimaTarikh;
+                        self.juruteknikNama = res.juruteknikNama;
+                        self.juruteknikTarikh = res.juruteknikTarikh;
+                        self.juruteknikMasalah = res.juruteknikMasalah;
+                        self.juruteknikCara = res.juruteknikCara;
+                        self.juruteknikOs = res.juruteknikOs;
+                        self.juruteknikCpu = res.juruteknikCpu;
+                        self.juruteknikRam = res.juruteknikRam;
+                        self.juruteknikHdd = res.juruteknikHdd;
+                        self.ipOri = res.ipOri;
+                        self.ipAfter = res.ipAfter;
+                        self.ipDitukar = res.ipDitukar;
+                        self.diterimaNama = res.diterimaNama;
+                        self.diterimaSyarikat = res.diterimaSyarikat;
+                        self.diterimaTarikh = res.diterimaTarikh;
+                        self.dikembaliNama = res.dikembaliNama;
+                        self.dikembaliSyarikat = res.dikembaliSyarikat;
+                        self.dikembaliTarikh = res.dikembaliTarikh;
+                        self.pegawaiNama = res.pegawaiNama;
+                        self.pegawaiTarikh = res.pegawaiTarikh;
+                        self.formId = id;
+
                       }}
                     )
                    
                 },
                 completeForm(id){
                     console.log("complete " + id);
-                    $.post({
+                    $.get({
                       url: `[[@{/repairform/complete}]]?param=` + id,
                       dataType: "json",
                       contentType: "application/json; charset=utf-8",

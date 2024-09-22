@@ -56,10 +56,15 @@ public class RepairFormController {
         return service.save(param);
         
     }
-    @PostMapping("complete")
+    @GetMapping("complete")
     public @ResponseBody Response complete(@RequestParam Integer param) {
         System.out.println("complete " + param);
         return service.complete(param);
+        
+    }
+    @GetMapping("getDetail")
+    public @ResponseBody RepairForm getDetail(@RequestParam Integer param) {
+        return repo.findByFormId(param);
         
     }
     @PostMapping("delete")

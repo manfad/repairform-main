@@ -14,6 +14,10 @@ public class SecurityConfig {
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.csrf(csrf -> csrf.disable());
+
+        http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()));
+
 		http
 			.authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/login").permitAll() 
@@ -24,6 +28,7 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/", true)      
 				.permitAll()
 			)
+			
 			.logout((logout) -> logout.logoutUrl("/logout").logoutSuccessUrl("/login?logout").permitAll());
 
 		return http.build();
@@ -34,4 +39,5 @@ public class SecurityConfig {
         // Disable password encoding by using NoOpPasswordEncoder
         return NoOpPasswordEncoder.getInstance();
     }
+	
 }

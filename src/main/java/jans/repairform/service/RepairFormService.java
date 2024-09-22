@@ -23,7 +23,12 @@ public class RepairFormService {
     public Response save(RepairForm form){
         System.out.println("123");
         Response res = new Response();
-        RepairForm newData = new RepairForm();
+        RepairForm newData ;
+        if(form.getFormId() != null){
+            newData = repo.findByFormId(form.getFormId());
+        }else{
+            newData = new RepairForm();
+        }
         newData.setStatus(form.getStatus());
         newData.setCreatedDate(LocalDate.now());
         newData.setIncidentNo(form.getIncidentNo());
