@@ -53,7 +53,7 @@ public class RepairFormController {
         }
 
 
-        String[] cols = new String[]{"incidentNo","incidentDate","diterimaNama","status",""};
+        String[] cols = new String[]{"incidentNo","incidentDate","diterimaNama","formStatus",""};
 
         DataTable<RepairForm> table = new DataTable<>();
         Page<RepairForm> list;
