@@ -48,12 +48,10 @@ public class RepairFormController {
      @RequestParam("order[0][dir]") String orderDir,
      @RequestParam String condition,
      @RequestParam(required = false) LocalDate dateSearch){
-        if(!condition.isEmpty()){
-            System.out.println("Condition: " + condition);
-        }
+       
 
 
-        String[] cols = new String[]{"incidentNo","incidentDate","diterimaNama","formStatus",""};
+        String[] cols = new String[]{"formId","incidentNo","incidentDate","diterimaNama","formStatus",""};
 
         DataTable<RepairForm> table = new DataTable<>();
         Page<RepairForm> list;

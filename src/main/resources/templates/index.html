@@ -33,7 +33,7 @@
                             <span th:text="${name}">[name]</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -73,6 +73,7 @@
             <table class="table" id="reportTable">
                 <thead>
                     <tr>
+                        <th>Form ID</th>
                         <th>Incident No</th>
                         <th>Incident Date</th>
                         <th>Diserah</th>
@@ -492,6 +493,7 @@
                                 "orderable":false
                             },],
                         "columns": [
+                            { "data": "formId" },
                             { "data": "incidentNo" },
                             { "data": "incidentDate" },
                             { "data": "diterimaNama" },
@@ -522,35 +524,39 @@
                         }
                     });
 
+                    $('#searchDateModal').modal('hide');
                     
                     reportTable.on('click', 'button.btn-success', (event) => {
                         event.preventDefault();
                         const data = reportTable.row($(event.target).closest('tr')).data();
-                        this.completeForm(data.formId);
+                        if (data) { 
+                            this.completeForm(data.formId);
+                        }
                     });
                     reportTable.on('click', 'button.btn-primary', (event) => {
                         event.preventDefault();
                         const data = reportTable.row($(event.target).closest('tr')).data();
-                        this.editForm(data.formId);
+                        if (data) { 
+                            this.editForm(data.formId);
+                            console.log(data.formId);
+                        }
                     });
                     reportTable.on('click', 'button.btn-danger', (event) => {
                         event.preventDefault();
                         const data = reportTable.row($(event.target).closest('tr')).data();
-                        this.deleteForm(data.formId);
+                        if (data) { 
+                            this.deleteForm(data.formId);
+                        }
                     });
 
                     reportTable.on('click', 'button.btn-secondary', (event) => {
                         event.preventDefault();
                         const data = reportTable.row($(event.target).closest('tr')).data();
-                        this.openPdfModal();
+                        if (data) { 
+                            this.openPdfModal();
+                        }
                     });
 
-                  
-
-                    // $('#searchBar').on('keyup', (event) => {
-                    //     const searchValue = event.target.value;
-                    //     reportTable.search(searchValue).draw(); 
-                    // });
                 },
                 save(){
                     var data={
@@ -610,7 +616,6 @@
                       success: function (res) {
                         $('#addReportModal').modal('show');
 
-                        console.log(this.incidentNo);
                         self.incidentNo = res.incidentNo;
                         self.incidentDate = res.incidentDate;
                         self.incidentType = res.incidentType;
@@ -647,9 +652,46 @@
                         self.pegawaiTarikh = res.pegawaiTarikh;
                         self.formId = id;
 
+                        // Clear data after modal is closed
+                        $('#addReportModal').on('hidden.bs.modal', function () {
+                          self.incidentNo = '';
+                          self.incidentDate = new Date().toISOString().split('T')[0];
+                          self.incidentType = '';
+                          self.quotationNo = '';
+                          self.modelPeralatan = '';
+                          self.noSiri = '';
+                          self.diserahNama = '';
+                          self.diserahBhg = '';
+                          self.diserahTarikh = new Date().toISOString().split('T')[0];
+                          self.diambilNama = '';
+                          self.diambilBhg = '';
+                          self.diambilTarikh = new Date().toISOString().split('T')[0];
+                          self.masalah = '';
+                          self.penerimaNama = '';
+                          self.penerimaTarikh = new Date().toISOString().split('T')[0];
+                          self.juruteknikNama = '';
+                          self.juruteknikTarikh = new Date().toISOString().split('T')[0];
+                          self.juruteknikMasalah = '';
+                          self.juruteknikCara = '';
+                          self.juruteknikOs = '';
+                          self.juruteknikCpu = '';
+                          self.juruteknikRam = '';
+                          self.juruteknikHdd = '';
+                          self.ipOri = '';
+                          self.ipAfter = '';
+                          self.ipDitukar = '';
+                          self.diterimaNama = '';
+                          self.diterimaSyarikat = '';
+                          self.diterimaTarikh = new Date().toISOString().split('T')[0];
+                          self.dikembaliNama = '';
+                          self.dikembaliSyarikat = '';
+                          self.dikembaliTarikh = new Date().toISOString().split('T')[0];
+                          self.pegawaiNama = '';
+                          self.pegawaiTarikh = new Date().toISOString().split('T')[0];
+                          self.formId = '';
+                        });
                       }}
                     )
-                   
                 },
                 completeForm(id){
                     $.get({
