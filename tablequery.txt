@@ -1,6 +1,6 @@
 CREATE TABLE `repairform` (
   `form_id` int NOT NULL AUTO_INCREMENT,
-  `status` varchar(255) DEFAULT NULL,
+  `form_status` varchar(255) DEFAULT NULL,
   `incident_no` varchar(255) DEFAULT NULL,
   `incident_date` date DEFAULT NULL,
   `incident_type` varchar(255) DEFAULT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE `user` (
 INSERT INTO user (username, password, name)
 VALUES ('your_username', 'your_password', 'your_name');
 
-INSERT INTO repairform (incident_no, incident_date, diterima_nama, status)
+INSERT INTO repairform (incident_no, incident_date, diterima_nama, form_status)
 VALUES ('test1', CURRENT_DATE, 'John Doe', 'N'),
        ('test2', CURRENT_DATE, 'Jane Smith', 'N'),
        ('test3', CURRENT_DATE, 'Michael Johnson', 'N'),

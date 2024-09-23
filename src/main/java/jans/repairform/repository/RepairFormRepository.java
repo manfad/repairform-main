@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import jans.repairform.model.RepairForm;
-import java.util.List;
 import java.time.LocalDate;
 
 
