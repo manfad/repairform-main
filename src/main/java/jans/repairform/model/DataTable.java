@@ -9,7 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DataTableRes<T> {
+public class DataTable<T> {
+	
     static int draw = 1;
 	long recordsFiltered;
 	long recordsTotal;

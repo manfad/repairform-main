@@ -1,10 +1,14 @@
 package jans.repairform.controller;
 
+import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -18,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jans.repairform.model.DataTableRes;
+import jans.repairform.model.DataTable;
 import jans.repairform.model.RepairForm;
 import jans.repairform.model.Response;
 import jans.repairform.repository.RepairFormRepository;
@@ -38,40 +42,61 @@ public class RepairFormController {
     @Autowired RepairFormRepository repo;
 
     @GetMapping("fetch")
-	public @ResponseBody DataTableRes<RepairForm> fetch() {
-        
+	public @ResponseBody DataTable<RepairForm> fetch(int start, int length,
+     @RequestParam(value = "search[value]") String search, 
+     @RequestParam("order[0][column]") Integer orderCol, 
+     @RequestParam("order[0][dir]") String orderDir,
+     @RequestParam String condition,
+     @RequestParam(required = false) LocalDate dateSearch){
+        if(!condition.isEmpty()){
+            System.out.println("Condition: " + condition);
+        }
 
-        DataTableRes<RepairForm> table = new DataTableRes<>();
-        List<RepairForm> lists = repo.findAll();
 
-        table.setData(lists);
-        table.setRecordsFiltered(lists.size());
-        table.setRecordsTotal(lists.size());
+        String[] cols = new String[]{"incidentNo","incidentDate","diterimaNama","status",""};
+
+        DataTable<RepairForm> table = new DataTable<>();
+        Page<RepairForm> list;
+        if(!search.isEmpty()){
+            list = repo.findBySearch(PageRequest.of(start / length, length), '%'+search+'%');
+        }else{
+            if (condition.equals("new")) {
+                list = repo.findByCreatedDate( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),LocalDate.now());
+            } else if (condition.equals("complete")) {
+                list = repo.findByFormStatus( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),"C");
+            } else if (condition.equals("date")) {
+                System.out.println("dateSearch: " + dateSearch);
+                list = repo.findByCreatedDate( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),dateSearch);
+            } else {
+                list = repo.findAll(PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])));
+            }
+        }
+
+        table.setData(list.getContent());
+        table.setRecordsFiltered(list.getTotalElements());
+        table.setRecordsTotal(list.getTotalElements());
         return table;
        
 	}
+
     @PostMapping("save")
     public @ResponseBody Response save(@RequestBody RepairForm param) {
-        
         return service.save(param);
-        
     }
+
     @GetMapping("complete")
     public @ResponseBody Response complete(@RequestParam Integer param) {
-        System.out.println("complete " + param);
         return service.complete(param);
-        
     }
+
     @GetMapping("getDetail")
     public @ResponseBody RepairForm getDetail(@RequestParam Integer param) {
         return repo.findByFormId(param);
-        
     }
+
     @PostMapping("delete")
     public @ResponseBody Response delete(@RequestParam Integer param) {
-        System.out.println("deleting " + param);
         return service.delete(param);
-        
     }
 
     @GetMapping("pdf")
@@ -79,12 +104,14 @@ public class RepairFormController {
         model.addAttribute("jasperfile", "repairform");
         return "jasper/pdf";
     }
+
     @GetMapping("preview")
     public ResponseEntity<Map<String, String>> preview() {
         Map<String, String> response = new HashMap<>();
         response.put("pdfUrl", "/repairform/report");
         return ResponseEntity.ok(response);
     }
+
     @GetMapping("report")
     public ResponseEntity<byte[]> generatePdf() {
         try {

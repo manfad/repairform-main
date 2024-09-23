@@ -51,3 +51,20 @@ CREATE TABLE `user` (
 
 INSERT INTO user (username, password, name)
 VALUES ('your_username', 'your_password', 'your_name');
+
+INSERT INTO repairform (incident_no, incident_date, diterima_nama, status)
+VALUES ('test1', CURRENT_DATE, 'John Doe', 'N'),
+       ('test2', CURRENT_DATE, 'Jane Smith', 'N'),
+       ('test3', CURRENT_DATE, 'Michael Johnson', 'N'),
+       ('test4', CURRENT_DATE, 'Emily Brown', 'N'),
+       ('test5', CURRENT_DATE, 'William Davis', 'N'),
+       ('test6', CURRENT_DATE, 'Sarah Taylor', 'N'),
+       ('test7', CURRENT_DATE, 'Kevin White', 'N'),
+       ('test8', CURRENT_DATE, 'Lisa Harris', 'N'),
+       ('test9', CURRENT_DATE, 'James Martin', 'N'),
+       ('test10', CURRENT_DATE, 'Jessica Thompson', 'N'),
+       ('test11', CURRENT_DATE, 'Robert Walker', 'N'),
+       ('test12', CURRENT_DATE, 'Amanda Lee', 'N'),
+       ('test13', CURRENT_DATE, 'Christopher Hall', 'N'),
+       ('test14', CURRENT_DATE, 'Samantha Wright', 'N'),
+       ('test15', CURRENT_DATE, 'Matthew Lewis', 'N');

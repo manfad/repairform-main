@@ -21,18 +21,20 @@ public class RepairFormService {
 
    
     public Response save(RepairForm form){
-        System.out.println("123");
+
         Response res = new Response();
         RepairForm newData ;
         if(form.getFormId() != null){
             newData = repo.findByFormId(form.getFormId());
+            
         }else{
             newData = new RepairForm();
+            newData.setCreatedDate(LocalDate.now());
         }
-        newData.setStatus(form.getStatus());
-        newData.setCreatedDate(LocalDate.now());
+
+        newData.setFormStatus("N");
         newData.setIncidentNo(form.getIncidentNo());
-        newData.setIncidentDate(LocalDate.now());
+        newData.setIncidentDate(form.getIncidentDate());
         newData.setIncidentType(form.getIncidentType());
         newData.setQuotationNo(form.getQuotationNo());
         newData.setModelPeralatan(form.getModelPeralatan());
@@ -65,18 +67,19 @@ public class RepairFormService {
         newData.setDikembaliTarikh(form.getDikembaliTarikh());
         newData.setPegawaiNama(form.getPegawaiNama());
         newData.setPegawaiTarikh(form.getPegawaiTarikh());
+
         repo.save(newData);
         res.setMessage("Succesfully");
         res.setSuccess(true);
         return res;
+
     }
     public Response complete(Integer param){
-        Response res = new Response();
-        
-        RepairForm form = repo.findByFormId(param);
 
+        Response res = new Response();
+        RepairForm form = repo.findByFormId(param);
         if(form != null){
-            form.setStatus("C");
+            form.setFormStatus("C");
             repo.save(form);
             res.setMessage("Succesfully");
             res.setSuccess(true);
@@ -85,11 +88,11 @@ public class RepairFormService {
         }
         return res;
     }
-    public Response delete(Integer param){
-        Response res = new Response();
-        
-        RepairForm form = repo.findByFormId(param);
 
+    public Response delete(Integer param){
+
+        Response res = new Response();
+        RepairForm form = repo.findByFormId(param);
         if(form != null){
             repo.delete(form);
             res.setMessage("Succesfully");

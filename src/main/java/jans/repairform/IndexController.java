@@ -20,11 +20,12 @@ public class IndexController {
     
     @GetMapping("/")
     public String index(Model model) {
+
         String name = userService.getCurrentUsername();
         model.addAttribute("name", name);
-
         return "index";
     }
+
     @GetMapping("/login")
     public String login(Model model) {
 

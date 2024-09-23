@@ -19,18 +19,12 @@ public class JasperReportService {
     
     // Method to generate PDF from .jasper file
     public byte[] generatePdfReport(String jasperFileName, Map<String, Object> parameters) throws JRException {
-        // Load the compiled Jasper file from the resources folder
+
         InputStream jasperStream = getClass().getResourceAsStream("/jasper/" + jasperFileName);
         System.out.println("/jasper/"+jasperFileName);
         JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
-
-        // Empty data source, use a real data source if needed
         JRDataSource dataSource = new JREmptyDataSource();
-
-        // Fill the report with parameters and data source
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-
-        // Export the filled report to a PDF
         byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
 
         return pdfReport;
