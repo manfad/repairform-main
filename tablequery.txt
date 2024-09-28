@@ -52,19 +52,19 @@ CREATE TABLE `user` (
 INSERT INTO user (username, password, name)
 VALUES ('your_username', 'your_password', 'your_name');
 
-INSERT INTO repairform (incident_no, incident_date, diterima_nama, form_status)
+INSERT INTO repairform (model_peralatan, created_date, diserah_nama, form_status)
 VALUES ('test1', CURRENT_DATE, 'John Doe', 'N'),
-       ('test2', CURRENT_DATE, 'Jane Smith', 'N'),
+       ('test2', '2024-01-01', 'Jane Smith', 'N'),
        ('test3', CURRENT_DATE, 'Michael Johnson', 'N'),
-       ('test4', CURRENT_DATE, 'Emily Brown', 'N'),
+       ('test4', '2024-06-01', 'Emily Brown', 'N'),
        ('test5', CURRENT_DATE, 'William Davis', 'N'),
-       ('test6', CURRENT_DATE, 'Sarah Taylor', 'N'),
-       ('test7', CURRENT_DATE, 'Kevin White', 'N'),
-       ('test8', CURRENT_DATE, 'Lisa Harris', 'N'),
-       ('test9', CURRENT_DATE, 'James Martin', 'N'),
-       ('test10', CURRENT_DATE, 'Jessica Thompson', 'N'),
-       ('test11', CURRENT_DATE, 'Robert Walker', 'N'),
-       ('test12', CURRENT_DATE, 'Amanda Lee', 'N'),
-       ('test13', CURRENT_DATE, 'Christopher Hall', 'N'),
-       ('test14', CURRENT_DATE, 'Samantha Wright', 'N'),
-       ('test15', CURRENT_DATE, 'Matthew Lewis', 'N');
+       ('hp printer', '2024-03-01', 'Sarah Taylor', 'N'),
+       ('hp pc', CURRENT_DATE, 'Kevin White', 'N'),
+       ('hp laptop', '2024-09-01', 'Lisa Harris', 'N'),
+       ('dell printer', CURRENT_DATE, 'James Martin', 'N'),
+       ('dell laptop', '2024-05-01', 'Jessica Thompson', 'N'),
+       ('desktop', CURRENT_DATE, 'Robert Walker', 'N'),
+       ('keyboard', '2024-11-01', 'Amanda Lee', 'N'),
+       ('asus pc', CURRENT_DATE, 'Christopher Hall', 'N'),
+       ('asus laptop', '2024-07-01', 'Samantha Wright', 'N'),
+       ('asus printer', CURRENT_DATE, 'Matthew Lewis', 'N');

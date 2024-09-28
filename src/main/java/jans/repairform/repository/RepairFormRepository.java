@@ -19,11 +19,12 @@ public interface RepairFormRepository extends JpaRepository<RepairForm,Integer>{
 
     RepairForm findByFormId(Integer formId);
 
-    @Query(value="SELECT * FROM repairform WHERE incident_no LIKE :value", nativeQuery = true)
+    @Query(value="SELECT * FROM repairform WHERE model_peralatan LIKE :value", nativeQuery = true)
     Page<RepairForm> findBySearch(Pageable pageable, String value);
 
     Page<RepairForm> findByFormStatus(Pageable pageable,String status);
 
-    Page<RepairForm> findByCreatedDate(Pageable pageable,LocalDate createdDate);
+    Page<RepairForm> findByCreatedDate(Pageable pageable,LocalDate startDate);
+    Page<RepairForm> findByCreatedDateBetween(Pageable pageable,LocalDate startDate,LocalDate endDate);
 
 }

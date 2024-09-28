@@ -47,11 +47,12 @@ public class RepairFormController {
      @RequestParam("order[0][column]") Integer orderCol, 
      @RequestParam("order[0][dir]") String orderDir,
      @RequestParam String condition,
-     @RequestParam(required = false) LocalDate dateSearch){
+     @RequestParam(required = false) LocalDate startDate,
+     @RequestParam(required = false) LocalDate endDate){
        
 
 
-        String[] cols = new String[]{"formId","incidentNo","incidentDate","diterimaNama","formStatus",""};
+        String[] cols = new String[]{"incidentNo","incidentDate","diserahNama","formStatus",""};
 
         DataTable<RepairForm> table = new DataTable<>();
         Page<RepairForm> list;
@@ -63,8 +64,7 @@ public class RepairFormController {
             } else if (condition.equals("complete")) {
                 list = repo.findByFormStatus( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),"C");
             } else if (condition.equals("date")) {
-                System.out.println("dateSearch: " + dateSearch);
-                list = repo.findByCreatedDate( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),dateSearch);
+                list = repo.findByCreatedDateBetween( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),startDate,endDate);
             } else {
                 list = repo.findAll(PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])));
             }
