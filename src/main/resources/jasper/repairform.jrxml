@@ -1,7 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repairform" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9907ae37-65bd-42c4-95b0-f0533ace020b">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repairform" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="9907ae37-65bd-42c4-95b0-f0533ace020b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="localhost"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="638"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="348"/>
+	<parameter name="formid" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT incident_no,
+	incident_date,
+	incident_type,
+	quotation_no,
+	model_peralatan,
+	no_siri,
+	diserah_nama,
+	diserah_bhg,
+	diserah_tarikh,
+	diambil_nama,
+	diambil_bhg,
+	diambil_tarikh,
+	masalah_pemohon,
+	penerima_nama,
+	penerima_tarikh,
+	juruteknik_nama,
+	juruteknik_tarikh,
+	juruteknik_masalah,
+	juruteknik_cara,
+	juruteknik_os,
+	juruteknik_cpu,
+	juruteknik_ram,
+	juruteknik_hdd,
+	ip_ori,
+	ip_after,
+	ip_ditukar,
+	diterima_nama,
+	diterima_syarikat,
+	diterima_tarikh,
+	dikembali_nama,
+	dikembali_syarikat,
+	dikembali_tarikh,
+	pegawai_nama,
+	pegawai_tarikh
+FROM repairform.repairform
+WHERE 
+	 repairform.repairform.form_id = $P{formid}]]>
+	</queryString>
+	<field name="incident_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="incident_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="incident_no"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="incident_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="incident_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="incident_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="incident_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="incident_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="incident_type"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="quotation_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="quotation_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="quotation_no"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="model_peralatan" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="model_peralatan"/>
+		<property name="com.jaspersoft.studio.field.label" value="model_peralatan"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="no_siri" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="no_siri"/>
+		<property name="com.jaspersoft.studio.field.label" value="no_siri"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="diserah_nama" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="diserah_nama"/>
+		<property name="com.jaspersoft.studio.field.label" value="diserah_nama"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="diserah_bhg" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="diserah_bhg"/>
+		<property name="com.jaspersoft.studio.field.label" value="diserah_bhg"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="diserah_tarikh" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="diserah_tarikh"/>
+		<property name="com.jaspersoft.studio.field.label" value="diserah_tarikh"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="diambil_nama" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="diambil_nama"/>
+		<property name="com.jaspersoft.studio.field.label" value="diambil_nama"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="diambil_bhg" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="diambil_bhg"/>
+		<property name="com.jaspersoft.studio.field.label" value="diambil_bhg"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="diambil_tarikh" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="diambil_tarikh"/>
+		<property name="com.jaspersoft.studio.field.label" value="diambil_tarikh"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="masalah_pemohon" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="masalah_pemohon"/>
+		<property name="com.jaspersoft.studio.field.label" value="masalah_pemohon"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="penerima_nama" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="penerima_nama"/>
+		<property name="com.jaspersoft.studio.field.label" value="penerima_nama"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="penerima_tarikh" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="penerima_tarikh"/>
+		<property name="com.jaspersoft.studio.field.label" value="penerima_tarikh"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="juruteknik_nama" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="juruteknik_nama"/>
+		<property name="com.jaspersoft.studio.field.label" value="juruteknik_nama"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="juruteknik_tarikh" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="juruteknik_tarikh"/>
+		<property name="com.jaspersoft.studio.field.label" value="juruteknik_tarikh"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="juruteknik_masalah" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="juruteknik_masalah"/>
+		<property name="com.jaspersoft.studio.field.label" value="juruteknik_masalah"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="juruteknik_cara" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="juruteknik_cara"/>
+		<property name="com.jaspersoft.studio.field.label" value="juruteknik_cara"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="juruteknik_os" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="juruteknik_os"/>
+		<property name="com.jaspersoft.studio.field.label" value="juruteknik_os"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="juruteknik_cpu" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="juruteknik_cpu"/>
+		<property name="com.jaspersoft.studio.field.label" value="juruteknik_cpu"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="juruteknik_ram" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="juruteknik_ram"/>
+		<property name="com.jaspersoft.studio.field.label" value="juruteknik_ram"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="juruteknik_hdd" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="juruteknik_hdd"/>
+		<property name="com.jaspersoft.studio.field.label" value="juruteknik_hdd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="ip_ori" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ip_ori"/>
+		<property name="com.jaspersoft.studio.field.label" value="ip_ori"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="ip_after" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ip_after"/>
+		<property name="com.jaspersoft.studio.field.label" value="ip_after"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="ip_ditukar" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ip_ditukar"/>
+		<property name="com.jaspersoft.studio.field.label" value="ip_ditukar"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="diterima_nama" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="diterima_nama"/>
+		<property name="com.jaspersoft.studio.field.label" value="diterima_nama"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="diterima_syarikat" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="diterima_syarikat"/>
+		<property name="com.jaspersoft.studio.field.label" value="diterima_syarikat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="diterima_tarikh" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="diterima_tarikh"/>
+		<property name="com.jaspersoft.studio.field.label" value="diterima_tarikh"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="dikembali_nama" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dikembali_nama"/>
+		<property name="com.jaspersoft.studio.field.label" value="dikembali_nama"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="dikembali_syarikat" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dikembali_syarikat"/>
+		<property name="com.jaspersoft.studio.field.label" value="dikembali_syarikat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="dikembali_tarikh" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="dikembali_tarikh"/>
+		<property name="com.jaspersoft.studio.field.label" value="dikembali_tarikh"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="pegawai_nama" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="pegawai_nama"/>
+		<property name="com.jaspersoft.studio.field.label" value="pegawai_nama"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
+	<field name="pegawai_tarikh" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="pegawai_tarikh"/>
+		<property name="com.jaspersoft.studio.field.label" value="pegawai_tarikh"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="repairform"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -107,7 +320,7 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<text><![CDATA[Tarikh		:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="13" y="201" width="117" height="9" uuid="5e03cee4-e816-43a6-94d5-cf8e1bec4366"/>
+					<reportElement x="17" y="202" width="117" height="9" uuid="5e03cee4-e816-43a6-94d5-cf8e1bec4366"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="true" isUnderline="true"/>
 					</textElement>
@@ -121,14 +334,14 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<text><![CDATA[(CAWANGAN TEKNOLOGI MAKLUMAT)]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="14" y="211" width="83" height="9" uuid="7cb0a41e-59f1-4889-9bb1-334cdcfa8188"/>
+					<reportElement x="14" y="211" width="72" height="9" uuid="7cb0a41e-59f1-4889-9bb1-334cdcfa8188"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
 					</textElement>
 					<text><![CDATA[Nama	:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="295" y="211" width="83" height="9" uuid="a9c12e08-2a65-463f-83a9-48df6f956698"/>
+					<reportElement x="295" y="211" width="59" height="9" uuid="a9c12e08-2a65-463f-83a9-48df6f956698"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
 					</textElement>
@@ -180,28 +393,28 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<text><![CDATA[Cara penyelesaian yang diambil:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="315" y="301" width="156" height="9" uuid="90b2b694-495d-4abb-bce8-2e0310bfc8ca"/>
+					<reportElement x="301" y="301" width="99" height="9" uuid="90b2b694-495d-4abb-bce8-2e0310bfc8ca"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
 					</textElement>
 					<text><![CDATA[Operating System	:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="315" y="311" width="156" height="9" uuid="9be77f90-456f-42ea-a908-7283ae6ab08c"/>
+					<reportElement x="301" y="311" width="99" height="9" uuid="9be77f90-456f-42ea-a908-7283ae6ab08c"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
 					</textElement>
 					<text><![CDATA[Processor		:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="315" y="321" width="156" height="9" uuid="3b105f07-1a0f-4561-b5d3-4dc35b95febc"/>
+					<reportElement x="301" y="321" width="99" height="9" uuid="3b105f07-1a0f-4561-b5d3-4dc35b95febc"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
 					</textElement>
 					<text><![CDATA[RAM		:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="315" y="331" width="156" height="9" uuid="23246d61-0e47-4970-9004-899f044f5313"/>
+					<reportElement x="301" y="331" width="99" height="9" uuid="23246d61-0e47-4970-9004-899f044f5313"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
 					</textElement>
@@ -267,14 +480,14 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<text><![CDATA[DITERIMA OLEH -]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="354" y="502" width="83" height="10" uuid="da3bec8b-d3e7-4b9e-a3ab-fc29872c9df0"/>
+					<reportElement x="354" y="502" width="55" height="10" uuid="da3bec8b-d3e7-4b9e-a3ab-fc29872c9df0"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
 					</textElement>
 					<text><![CDATA[Syarikat		:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="354" y="491" width="83" height="10" uuid="d6af3ff9-0a9e-4d14-a7ce-6ee600b3415d"/>
+					<reportElement x="354" y="491" width="55" height="10" uuid="d6af3ff9-0a9e-4d14-a7ce-6ee600b3415d"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
 					</textElement>
@@ -288,7 +501,7 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<text><![CDATA[DIKEMBALI OLEH -]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="354" y="513" width="83" height="10" uuid="4a1808b3-68f5-44c2-bd46-c1b58b76db8d"/>
+					<reportElement x="354" y="513" width="55" height="10" uuid="4a1808b3-68f5-44c2-bd46-c1b58b76db8d"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
 					</textElement>
@@ -384,6 +597,209 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					</textElement>
 					<text><![CDATA[Syarikat		:]]></text>
 				</staticText>
+				<textField>
+					<reportElement x="137" y="81" width="91" height="9" uuid="18e6dd25-cf10-423f-b543-13a935059acc"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{model_peralatan}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="138" y="91" width="100" height="9" uuid="046fb07c-0f01-49c5-83a8-2edaaf7ba83c"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{no_siri}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="132" width="100" height="9" uuid="9326b3a8-fa62-4808-9e0e-909d8d91958c"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diserah_nama}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="99" y="143" width="100" height="9" uuid="ad40f23f-a8a2-49ad-b322-825160551f1c"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diserah_bhg}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="99" y="152" width="100" height="9" uuid="3276c83a-441b-4f5b-82dc-b514150131d0"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diserah_tarikh}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="378" y="132" width="109" height="10" uuid="e6810277-604f-4c80-9720-0f86cc777bef"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diambil_nama}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="377" y="141" width="109" height="10" uuid="fe74428a-4072-487e-aef4-635aca9ebf5e"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diambil_bhg}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="378" y="152" width="109" height="10" uuid="0cfb656e-049e-4dd5-9879-bbaf86e23755"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diambil_tarikh}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="16" y="171" width="359" height="30" uuid="bef0e9ea-e6f5-436d-a5c2-da46d4623179"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{masalah_pemohon}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="87" y="210" width="170" height="12" uuid="61ed3afb-dbf8-463a-9f2b-9107b91ea267"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{penerima_nama}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="353" y="210" width="169" height="12" uuid="98c52c3b-4587-42c0-aadd-fd064480bf00"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{penerima_tarikh}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="95" y="252" width="100" height="10" uuid="5845798a-8dc7-4b09-8b58-62cee3417fde"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{juruteknik_nama}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="379" y="261" width="100" height="13" uuid="1ce500d2-f507-4d6c-acc2-7de068ad4e03"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{juruteknik_tarikh}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="12" y="271" width="188" height="30" uuid="48e0c838-c7b8-4917-a739-c938258d54c8"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{juruteknik_masalah}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="12" y="311" width="168" height="39" uuid="3067c05e-3a68-4897-93fe-6d4e634f1021"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{juruteknik_cara}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="402" y="301" width="113" height="11" uuid="1a7850d8-0f84-41a9-8d40-a3500d30f42b"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{juruteknik_os}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="402" y="311" width="113" height="11" uuid="7bd3a434-cd24-498f-a3fc-84bd23a88d48"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{juruteknik_cpu}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="401" y="321" width="114" height="11" uuid="90f4f2fd-a0fa-4ed2-89e4-1b1647dee0f9"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{juruteknik_ram}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="401" y="331" width="114" height="11" uuid="3d04b19a-6056-432a-8395-852290f5bf14"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{juruteknik_hdd}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="171" y="361" width="106" height="9" uuid="9bb77b18-635b-419a-b049-e904adcfd800"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ip_ori}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="171" y="371" width="105" height="10" uuid="f0bbc3cc-841b-46c3-8932-728c68cc256c"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ip_after}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="99" y="490" width="101" height="12" uuid="369d500d-5ec0-413c-a255-729f1d1c8b1c"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diterima_nama}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="98" y="501" width="101" height="12" uuid="cc7ea1c8-c46e-4fd2-9273-e10cce394d7e"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diterima_syarikat}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="98" y="514" width="101" height="12" uuid="639420b1-cd2d-4ac4-b917-dcb8b7e7640a"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diterima_tarikh}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="411" y="493" width="111" height="10" uuid="252346e8-a650-4ae6-9755-4367d5e3f71f"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dikembali_nama}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="410" y="502" width="111" height="10" uuid="9df3431e-67cc-4f49-81f5-b0afc1ddcdd0"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dikembali_syarikat}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="411" y="513" width="111" height="10" uuid="a3c6a03d-a040-4498-afe4-30dd7f252de0"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dikembali_tarikh}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="96" y="562" width="100" height="9" uuid="ba58f0c7-2911-472c-b45d-9246a9ed3344"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pegawai_nama}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="376" y="562" width="100" height="10" uuid="9c4204a4-46c7-4dcb-b85d-a281c6fae32e"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pegawai_tarikh}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</detail>
