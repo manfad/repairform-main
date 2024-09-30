@@ -1,18 +1,11 @@
 package jans.repairform.controller;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +41,8 @@ public class RepairFormController {
      @RequestParam("order[0][dir]") String orderDir,
      @RequestParam String condition,
      @RequestParam(required = false) LocalDate startDate,
-     @RequestParam(required = false) LocalDate endDate){
+     @RequestParam(required = false) LocalDate endDate,
+     @RequestParam(required = false) String diserahSearch){
        
 
 
@@ -65,6 +59,8 @@ public class RepairFormController {
                 list = repo.findByFormStatus( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),"C");
             } else if (condition.equals("date")) {
                 list = repo.findByCreatedDateBetween( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),startDate,endDate);
+            } else if (condition.equals("diserah")) {
+                list = repo.findByDiserahNama( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),diserahSearch);
             } else {
                 list = repo.findAll(PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])));
             }
@@ -105,34 +101,5 @@ public class RepairFormController {
         return "jasper/pdf";
     }
 
-    @GetMapping("preview")
-    public ResponseEntity<Map<String, String>> preview() {
-        Map<String, String> response = new HashMap<>();
-        response.put("pdfUrl", "/repairform/report");
-        return ResponseEntity.ok(response);
-    }
-
-    @GetMapping("report")
-    public ResponseEntity<byte[]> generatePdf() {
-        try {
-            String reportName = "repairform";
-            Map<String, Object> parameters = new HashMap<>(); 
-
-            byte[] pdfReport = jasperService.generatePdfReport(reportName + ".jasper", parameters);
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDisposition(ContentDisposition.inline().filename(reportName + ".pdf").build());
-            headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-            headers.setPragma("public");
-
-            return ResponseEntity.ok()
-                    .headers(headers)
-                    .body(pdfReport);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).build();
-        }
-    }
+    
 }

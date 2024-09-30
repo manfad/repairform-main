@@ -29,6 +29,7 @@
                         <li><a class="nav-link" @click="fetchRecord('new')">New</a></li>
                         <li><a class="nav-link" @click="fetchRecord('complete')">Completed</a></li>
                         <li><a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchDateModal">Date</a></li>
+                        <li><a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchDiserahNama">District</a></li>
                     </ul>
                 </div>
                 <ul class="navbar-nav ms-auto">
@@ -420,16 +421,27 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel"
+            <div class="modal fade" id="searchDiserahNama" tabindex="-1" role="dialog" aria-labelledby="diserahNamaModalLabel"
                 aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="pdfModalLabel">PDF Report</h5>
+                            <h5 class="modal-title" id="diserahNamaModalLabel">Search by District</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <iframe id="pdfFrame" width="100%" height="600px" frameborder="0"></iframe>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <label for="diserahSearch" class="col form-label">District</label>
+                                    <select class="col form-control" id="diserahSearch" v-model="diserahSearch">
+                                        <option value="">Select District</option>
+                                        <option th:each="opt : ${diserahNama}" th:value="${opt}" th:text="${opt}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" @click="fetchRecord('diserah')">Search</button>
                         </div>
                     </div>
                 </div>
@@ -495,6 +507,7 @@
                     startDate:'',
                     endDate:new Date().toISOString().split('T')[0],
                     isView:false,
+                    diserahSearch:'',
                 }
             },mounted(){
                 this.fetchRecord("all");
@@ -527,6 +540,7 @@
                                 d.condition = condition;
                                 d.startDate = self.startDate;
                                 d.endDate = self.endDate;
+                                d.diserahSearch = self.diserahSearch;
                             },
                         },
                         "columnDefs": [
@@ -828,23 +842,6 @@
                 openPdfModal(id) {
                     console.log(id);
                     window.open(`[[@{/repairform/pdf}]]?formid=` + id, '_blank', 'location=yes, height=1080, width=1000, scrollbars=yes, status=yes');
-                    // $.ajax({
-                    //     url: '[[@{/repairform/pdf}]]?formid='+id,
-                    //     method: 'GET',
-                    //     success: (response) => {
-                    //         if (response && response.pdfUrl) {
-                    //             $('#pdfFrame').attr('src', response.pdfUrl);
-                    //             $('#pdfModal').modal('show');
-                    //         } else {
-                    //             console.error('Invalid response from server');
-                    //             alert('Error loading PDF preview');
-                    //         }
-                    //     },
-                    //     error: (error) => {
-                    //         console.error('Error fetching PDF URL:', error);
-                    //         alert('Error loading PDF preview2');
-                    //     }
-                    // });
                 },
                 
             },

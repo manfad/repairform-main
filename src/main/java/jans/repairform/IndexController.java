@@ -1,5 +1,7 @@
 package jans.repairform;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +23,10 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model) {
 
+        List<String> diserahNama = repo.getDiSerahNama();
         String name = userService.getCurrentUsername();
         model.addAttribute("name", name);
+        model.addAttribute("diserahNama", diserahNama);
         return "index";
     }
 

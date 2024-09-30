@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import jans.repairform.model.RepairForm;
 import java.time.LocalDate;
+import java.util.List;
 
 
 
@@ -24,7 +25,11 @@ public interface RepairFormRepository extends JpaRepository<RepairForm,Integer>{
 
     Page<RepairForm> findByFormStatus(Pageable pageable,String status);
 
+    Page<RepairForm> findByDiserahNama(Pageable pageable,String diserahNama);
+
     Page<RepairForm> findByCreatedDate(Pageable pageable,LocalDate startDate);
     Page<RepairForm> findByCreatedDateBetween(Pageable pageable,LocalDate startDate,LocalDate endDate);
 
+    @Query(value="SELECT diserah_nama FROM repairform ", nativeQuery = true)
+    List<String> getDiSerahNama();
 }
