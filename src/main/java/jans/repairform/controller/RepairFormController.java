@@ -95,7 +95,6 @@ public class RepairFormController {
 
     @GetMapping("pdf")
     public String pdf(Model model,@RequestParam String formid) {
-        System.out.println("formid = " +formid);
         model.addAttribute("jasperfile", "repairform");
         model.addAttribute("formid", formid);
         return "jasper/pdf";

@@ -219,17 +219,17 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="581" splitType="Stretch">
+		<band height="621" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<frame>
-				<reportElement x="1" y="-12" width="531" height="582" uuid="a2ebd698-4ed3-4fe5-8571-2d85955626a5">
+				<reportElement x="3" y="34" width="531" height="582" uuid="a2ebd698-4ed3-4fe5-8571-2d85955626a5">
 					<property name="com.jaspersoft.studio.layout"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<staticText>
-					<reportElement x="11" y="1" width="123" height="29" uuid="d6e89ad5-5eb8-4f55-8763-6350c1d6cb99"/>
+					<reportElement x="3" y="1" width="123" height="29" uuid="d6e89ad5-5eb8-4f55-8763-6350c1d6cb99"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7"/>
 					</textElement>
@@ -256,12 +256,12 @@ KOTA KINABALU, SABAH.]]></text>
 					<text><![CDATA[BUTIR-BUTIR PERALATAN]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="13" y="81" width="123" height="19" uuid="9bf6c017-149c-479e-9c55-36939364d8d9"/>
+					<reportElement x="13" y="81" width="97" height="19" uuid="9bf6c017-149c-479e-9c55-36939364d8d9"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7"/>
 					</textElement>
 					<text><![CDATA[Jenis / Model Peralatan	:
-No . Siri/ Inventori (JANS)	:]]></text>
+No . Siri/ Inventori (JANS):]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="13" y="100" width="83" height="10" uuid="4e025dd6-d112-4acd-a78d-b93f4eeda731"/>
@@ -442,24 +442,24 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<text><![CDATA[GATEWAY IP yang ASAL ditukar kembali?]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="241" y="381" width="19" height="9" uuid="f22a3466-9875-41f9-a098-4276f11dadae"/>
+					<reportElement x="221" y="382" width="19" height="9" uuid="f22a3466-9875-41f9-a098-4276f11dadae"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
 					</textElement>
 					<text><![CDATA[YA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="311" y="381" width="23" height="9" uuid="3d50e721-9f58-44db-8806-40515a0a4faf"/>
+					<reportElement x="277" y="381" width="23" height="9" uuid="3d50e721-9f58-44db-8806-40515a0a4faf"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isItalic="false" isUnderline="false"/>
 					</textElement>
 					<text><![CDATA[TIDAK]]></text>
 				</staticText>
 				<line>
-					<reportElement x="2" y="390" width="529" height="1" uuid="d29f2a01-447f-4ecb-9849-7413fd12e450"/>
+					<reportElement x="0" y="390" width="531" height="1" uuid="d29f2a01-447f-4ecb-9849-7413fd12e450"/>
 				</line>
 				<staticText>
-					<reportElement x="233" y="432" width="112" height="9" uuid="25585e70-df9f-4d13-95f0-2d886af50440"/>
+					<reportElement x="228" y="393" width="112" height="9" uuid="25585e70-df9f-4d13-95f0-2d886af50440"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isUnderline="false"/>
 					</textElement>
@@ -508,17 +508,17 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<text><![CDATA[Tarikh		:]]></text>
 				</staticText>
 				<line>
-					<reportElement x="3" y="525" width="527" height="1" uuid="f3a78826-21e2-4358-8682-d9b0ee109bfb"/>
+					<reportElement x="1" y="526" width="527" height="1" uuid="f3a78826-21e2-4358-8682-d9b0ee109bfb"/>
 				</line>
 				<staticText>
-					<reportElement x="12" y="524" width="118" height="9" uuid="11148e04-b4ab-4c54-9181-f1459377625b"/>
+					<reportElement x="14" y="527" width="118" height="9" uuid="11148e04-b4ab-4c54-9181-f1459377625b"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="true" isUnderline="true"/>
 					</textElement>
 					<text><![CDATA[DIISI OLEH PENERIMA LAPORAN]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="131" y="525" width="143" height="9" uuid="c459d399-4bfa-4343-a28e-2c92f657ed1c"/>
+					<reportElement x="133" y="528" width="143" height="9" uuid="c459d399-4bfa-4343-a28e-2c92f657ed1c"/>
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="7" isBold="false" isUnderline="false"/>
 					</textElement>
@@ -598,14 +598,14 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<text><![CDATA[Syarikat		:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="137" y="81" width="91" height="9" uuid="18e6dd25-cf10-423f-b543-13a935059acc"/>
+					<reportElement x="111" y="82" width="91" height="9" uuid="18e6dd25-cf10-423f-b543-13a935059acc"/>
 					<textElement>
 						<font size="7"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{model_peralatan}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="138" y="91" width="100" height="9" uuid="046fb07c-0f01-49c5-83a8-2edaaf7ba83c"/>
+					<reportElement x="111" y="92" width="100" height="9" uuid="046fb07c-0f01-49c5-83a8-2edaaf7ba83c"/>
 					<textElement>
 						<font size="7"/>
 					</textElement>
@@ -630,7 +630,7 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{diserah_tarikh}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{diserah_tarikh})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="378" y="132" width="109" height="10" uuid="e6810277-604f-4c80-9720-0f86cc777bef"/>
@@ -651,7 +651,7 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{diambil_tarikh}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{diambil_tarikh})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="16" y="171" width="359" height="30" uuid="bef0e9ea-e6f5-436d-a5c2-da46d4623179"/>
@@ -672,7 +672,8 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{penerima_tarikh}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{penerima_tarikh})
+]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="95" y="252" width="100" height="10" uuid="5845798a-8dc7-4b09-8b58-62cee3417fde"/>
@@ -686,7 +687,8 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{juruteknik_tarikh}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{juruteknik_tarikh})
+]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="12" y="271" width="188" height="30" uuid="48e0c838-c7b8-4917-a739-c938258d54c8"/>
@@ -763,7 +765,7 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{diterima_tarikh}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{diterima_tarikh})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="411" y="493" width="111" height="10" uuid="252346e8-a650-4ae6-9755-4367d5e3f71f"/>
@@ -784,7 +786,8 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{dikembali_tarikh}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{diterima_tarikh})
+]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="96" y="562" width="100" height="9" uuid="ba58f0c7-2911-472c-b45d-9246a9ed3344"/>
@@ -798,9 +801,67 @@ No . Siri/ Inventori (JANS)	:]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{pegawai_tarikh}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{pegawai_tarikh})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="182" y="382" width="43" height="11" uuid="51c9f420-cee1-4b8d-9cbc-a1deef5c6b70"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ip_ditukar}.equals("true") ? "\u2611" : "\u2610"
+]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="246" y="381" width="31" height="11" uuid="d3e9ab80-6987-4add-8940-64d6138963ed"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[!$F{ip_ditukar}.equals("true") ? "\u2611" : "\u2610"
+]]></textFieldExpression>
 				</textField>
 			</frame>
+			<staticText>
+				<reportElement x="3" y="16" width="83" height="9" uuid="a72787c6-7788-4c8c-9ee3-1a8187bcd6cf"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="7" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Incident No/Date/Type]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="86" y="11" width="65" height="13" uuid="da5153ad-8832-4865-bbfc-7cd8ce711431"/>
+				<textElement>
+					<font size="7" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{incident_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="151" y="11" width="74" height="14" uuid="0d59fdaa-b74e-42d6-b2e6-9360bc00c478"/>
+				<textElement>
+					<font size="7" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{incident_date})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="225" y="11" width="74" height="14" uuid="c33b555a-bced-4c78-bb4e-fcee69ce5fae"/>
+				<textElement>
+					<font size="7" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{incident_type}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="25" width="83" height="9" uuid="f283a7f7-ca6c-4123-9094-4b4c5409128a"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="7" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Quotation]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="86" y="24" width="65" height="9" uuid="f14604b7-bb3f-4faa-ba58-ade4add55fd5"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quotation_no}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>
