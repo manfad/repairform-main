@@ -52,19 +52,19 @@ CREATE TABLE `user` (
 INSERT INTO user (username, password, name)
 VALUES ('your_username', 'your_password', 'your_name');
 
-INSERT INTO repairform (model_peralatan, created_date, diserah_nama, form_status)
-VALUES ('test1', CURRENT_DATE, 'John Doe', 'N'),
-       ('test2', '2024-01-01', 'Jane Smith', 'N'),
-       ('test3', CURRENT_DATE, 'Michael Johnson', 'N'),
-       ('test4', '2024-06-01', 'Emily Brown', 'N'),
-       ('test5', CURRENT_DATE, 'William Davis', 'N'),
-       ('hp printer', '2024-03-01', 'Sarah Taylor', 'N'),
-       ('hp pc', CURRENT_DATE, 'Kevin White', 'N'),
-       ('hp laptop', '2024-09-01', 'Lisa Harris', 'N'),
-       ('dell printer', CURRENT_DATE, 'James Martin', 'N'),
-       ('dell laptop', '2024-05-01', 'Jessica Thompson', 'N'),
-       ('desktop', CURRENT_DATE, 'Robert Walker', 'N'),
-       ('keyboard', '2024-11-01', 'Amanda Lee', 'N'),
-       ('asus pc', CURRENT_DATE, 'Christopher Hall', 'N'),
-       ('asus laptop', '2024-07-01', 'Samantha Wright', 'N'),
-       ('asus printer', CURRENT_DATE, 'Matthew Lewis', 'N');
+INSERT INTO repairform (model_peralatan, created_date, diserah_nama, form_status, incident_no, incident_type, quotation_no, no_siri, diserah_bhg, diambil_nama, diambil_bhg, masalah_pemohon, penerima_nama)
+VALUES ('test1', '2024-03-15', 'John', 'N', '', '', '', '', '', '', '', '', ''),
+       ('test2', '2024-01-01', 'Jane', 'N', '', '', '', '', '', '', '', '', ''),
+       ('test3', '2024-05-22', 'Michael', 'N', '', '', '', '', '', '', '', '', ''),
+       ('test4', '2024-06-01', 'Emily', 'N', '', '', '', '', '', '', '', '', ''),
+       ('test5', '2024-08-30', 'William', 'N', '', '', '', '', '', '', '', '', ''),
+       ('hp printer', '2024-03-01', 'Sarah', 'N', '', '', '', '', '', '', '', '', ''),
+       ('hp pc', '2024-04-05', 'Kevin', 'N', '', '', '', '', '', '', '', '', ''),
+       ('hp laptop', '2024-09-01', 'Lisa', 'N', '', '', '', '', '', '', '', '', ''),
+       ('dell printer', '2024-07-18', 'James', 'N', '', '', '', '', '', '', '', '', ''),
+       ('dell laptop', '2024-05-01', 'Jessica', 'N', '', '', '', '', '', '', '', '', ''),
+       ('desktop', '2024-10-01', 'Robert', 'N', '', '', '', '', '', '', '', '', ''),
+       ('keyboard', '2024-11-01', 'Amanda', 'N', '', '', '', '', '', '', '', '', ''),
+       ('asus pc', '2024-02-29', 'Christopher', 'N', '', '', '', '', '', '', '', '', ''),
+       ('asus laptop', '2024-07-01', 'Samantha', 'N', '', '', '', '', '', '', '', '', ''),
+       ('asus printer', '2024-12-20', 'Matthew', 'N', '', '', '', '', '', '', '', '', '');

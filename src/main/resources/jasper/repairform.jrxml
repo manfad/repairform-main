@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repairform" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="9907ae37-65bd-42c4-95b0-f0533ace020b">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="localhost"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -630,7 +630,7 @@ No . Siri/ Inventori (JANS):]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{diserah_tarikh})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{diserah_tarikh} == null ? "" : new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{diserah_tarikh})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="378" y="132" width="109" height="10" uuid="e6810277-604f-4c80-9720-0f86cc777bef"/>
@@ -651,7 +651,7 @@ No . Siri/ Inventori (JANS):]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{diambil_tarikh})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{diambil_tarikh} == null ? "" : new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{diambil_tarikh})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="16" y="171" width="359" height="30" uuid="bef0e9ea-e6f5-436d-a5c2-da46d4623179"/>
@@ -672,8 +672,7 @@ No . Siri/ Inventori (JANS):]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{penerima_tarikh})
-]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{penerima_tarikh} == null ? "" : new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{penerima_tarikh})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="95" y="252" width="100" height="10" uuid="5845798a-8dc7-4b09-8b58-62cee3417fde"/>
@@ -687,8 +686,7 @@ No . Siri/ Inventori (JANS):]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{juruteknik_tarikh})
-]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{juruteknik_tarikh} == null ? "" : new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{juruteknik_tarikh})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="12" y="271" width="188" height="30" uuid="48e0c838-c7b8-4917-a739-c938258d54c8"/>
@@ -765,7 +763,7 @@ No . Siri/ Inventori (JANS):]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{diterima_tarikh})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{diterima_tarikh} == null ? "" : new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{diterima_tarikh})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="411" y="493" width="111" height="10" uuid="252346e8-a650-4ae6-9755-4367d5e3f71f"/>
@@ -786,8 +784,7 @@ No . Siri/ Inventori (JANS):]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{diterima_tarikh})
-]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{dikembali_tarikh} == null ? "" : new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{dikembali_tarikh})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="96" y="562" width="100" height="9" uuid="ba58f0c7-2911-472c-b45d-9246a9ed3344"/>
@@ -801,23 +798,21 @@ No . Siri/ Inventori (JANS):]]></text>
 					<textElement>
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{pegawai_tarikh})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{pegawai_tarikh} == null ? "" : new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{pegawai_tarikh})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="182" y="382" width="43" height="11" uuid="51c9f420-cee1-4b8d-9cbc-a1deef5c6b70"/>
 					<textElement>
 						<font size="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{ip_ditukar}.equals("true") ? "\u2611" : "\u2610"
-]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{ip_ditukar}.equals("true") ? "\u2611" : "\u2610"]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="246" y="381" width="31" height="11" uuid="d3e9ab80-6987-4add-8940-64d6138963ed"/>
 					<textElement>
 						<font size="6"/>
 					</textElement>
-					<textFieldExpression><![CDATA[!$F{ip_ditukar}.equals("true") ? "\u2611" : "\u2610"
-]]></textFieldExpression>
+					<textFieldExpression><![CDATA[!$F{ip_ditukar}.equals("true") ? "\u2611" : "\u2610"]]></textFieldExpression>
 				</textField>
 			</frame>
 			<staticText>
@@ -830,21 +825,21 @@ No . Siri/ Inventori (JANS):]]></text>
 			<textField>
 				<reportElement x="86" y="11" width="65" height="13" uuid="da5153ad-8832-4865-bbfc-7cd8ce711431"/>
 				<textElement>
-					<font size="7" isUnderline="true"/>
+					<font size="7" isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{incident_no}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="151" y="11" width="74" height="14" uuid="0d59fdaa-b74e-42d6-b2e6-9360bc00c478"/>
 				<textElement>
-					<font size="7" isUnderline="true"/>
+					<font size="7" isUnderline="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{incident_date})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{incident_date} != null ? new SimpleDateFormat("dd/MM/yyyy").format($F{incident_date}) : ""]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="225" y="11" width="74" height="14" uuid="c33b555a-bced-4c78-bb4e-fcee69ce5fae"/>
 				<textElement>
-					<font size="7" isUnderline="true"/>
+					<font size="7" isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{incident_type}]]></textFieldExpression>
 			</textField>
