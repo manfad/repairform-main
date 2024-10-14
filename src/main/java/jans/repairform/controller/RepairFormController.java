@@ -46,7 +46,7 @@ public class RepairFormController {
        
 
 
-        String[] cols = new String[]{"incidentNo","incidentDate","diserahNama","formStatus",""};
+        String[] cols = new String[]{"modelPeralatan","createdDate","diserahNama","formStatus",""};
 
         DataTable<RepairForm> table = new DataTable<>();
         Page<RepairForm> list;
@@ -62,7 +62,7 @@ public class RepairFormController {
             } else if (condition.equals("diserah")) {
                 list = repo.findByDiserahNama( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),diserahSearch);
             } else {
-                list = repo.findAll(PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])));
+                list = repo.findAllByOrderByCreatedDateDesc(PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])));
             }
         }
 
@@ -101,4 +101,6 @@ public class RepairFormController {
     }
 
     
+    
+
 }

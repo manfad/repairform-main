@@ -12,6 +12,11 @@ import jans.repairform.repository.UserRepository;
 public class UserService {
     @Autowired UserRepository userRepo;
     
+    public boolean isLoggedIn() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication != null && authentication.isAuthenticated() && 
+               !(authentication instanceof AnonymousAuthenticationToken);
+    }
     public String getCurrentUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         

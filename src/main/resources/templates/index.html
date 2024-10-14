@@ -48,7 +48,11 @@
     
         <div class="container mt-4">
             <div class="row">
-    
+                <div class="col-auto">
+
+                    <button class="btn btn-primary mb-3" type="submit" @click="qrcode">Generate QR Code for Current Page</button>
+                </div>
+
                 <!-- <div class="col-8">
                         <div class="input-group">
                             <input type="text" id="searchBar" class="form-control" placeholder="Searchbar">
@@ -843,7 +847,15 @@
                     console.log(id);
                     window.open(`[[@{/repairform/pdf}]]?formid=` + id, '_blank', 'location=yes, height=1080, width=1000, scrollbars=yes, status=yes');
                 },
-                
+                qrcode(){
+                    $.post({
+                      url: `[[@{/qrcode/generate}]]`,
+                      contentType: "application/json; charset=utf-8",
+                      success: function (res) {
+                        console.log(res);
+                      }}
+                    )
+                }
             },
         });
         app.mount('#app');

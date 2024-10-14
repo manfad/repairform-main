@@ -28,9 +28,9 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model) {
 
-        List<String> diserahNama = repo.getDiSerahNama();
         String name = userService.getCurrentUsername();
         model.addAttribute("name", name);
+        List<String> diserahNama = repo.getDiSerahNama();
         model.addAttribute("diserahNama", diserahNama);
         return "index";
     }
@@ -57,6 +57,11 @@ public class IndexController {
         userRepo.save(user);
         return "redirect:/register?success";
     }
-
+    @GetMapping("newform")
+    public String reqFormPage(Model model) {
+        boolean user = userService.isLoggedIn();
+        model.addAttribute("user", user);
+        return "new_form";
+    }
     
 }

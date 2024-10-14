@@ -119,6 +119,17 @@
 			<artifactId>vue</artifactId>
 			<version>3.2.45</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.4.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -126,7 +137,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>   <source>17</source> <target>17</target>
+				<configuration><source>17</source> <target>17</target>
 				</configuration>
 			</plugin>
 			<plugin>

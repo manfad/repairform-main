@@ -32,4 +32,7 @@ public interface RepairFormRepository extends JpaRepository<RepairForm,Integer>{
 
     @Query(value="SELECT diserah_nama FROM repairform ", nativeQuery = true)
     List<String> getDiSerahNama();
+
+    Page<RepairForm> findAllByOrderByCreatedDateDesc(Pageable pageable);
+
 }
