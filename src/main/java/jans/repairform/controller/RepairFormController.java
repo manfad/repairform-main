@@ -44,8 +44,6 @@ public class RepairFormController {
      @RequestParam(required = false) LocalDate endDate,
      @RequestParam(required = false) String diserahSearch){
        
-
-
         String[] cols = new String[]{"modelPeralatan","createdDate","diserahNama","formStatus",""};
 
         DataTable<RepairForm> table = new DataTable<>();

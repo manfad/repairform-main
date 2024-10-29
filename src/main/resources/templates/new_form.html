@@ -28,14 +28,11 @@
                 <div class="card-header text-center bg-dark text-white">
                     <h4 class="mb-0">Submit New Form</h4>
                 </div>
-
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="modelPeralatan" class="form-label form-label-sm">Model
-                                Peralatan</label>
-                            <input type="text" class="form-control form-control-sm" id="modelPeralatan"
-                                v-model="modelPeralatan">
+                            <label for="modelPeralatan" class="form-label form-label-sm">Model Peralatan</label>
+                            <input type="text" class="form-control form-control-sm" id="modelPeralatan" v-model="modelPeralatan">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="noSiri" class="form-label form-label-sm">No Siri</label>
@@ -44,143 +41,116 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="diserahNama" class="form-label form-label-sm">Diserah oleh
-                                Nama</label>
-                            <input type="text" class="form-control form-control-sm" id="diserahNama"
-                                v-model="diserahNama">
+                            <label for="diserahNama" class="form-label form-label-sm">Diserah oleh Nama</label>
+                            <input type="text" class="form-control form-control-sm" id="diserahNama" v-model="diserahNama">
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="diserahBhg" class="form-label form-label-sm">Diserah oleh
-                                Bhg</label>
-                            <input type="text" class="form-control form-control-sm" id="diserahBhg"
-                                v-model="diserahBhg">
+                            <label for="diserahBhg" class="form-label form-label-sm">Diserah oleh Bhg</label>
+                            <input type="text" class="form-control form-control-sm" id="diserahBhg" v-model="diserahBhg">
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="diserahTarikh" class="form-label form-label-sm">Diserah oleh
-                                Tarikh</label>
-                            <input type="date" class="form-control form-control-sm" id="diserahTarikh"
-                                v-model="diserahTarikh">
+                            <label for="diserahTarikh" class="form-label form-label-sm">Diserah oleh Tarikh</label>
+                            <input type="date" class="form-control form-control-sm" id="diserahTarikh" v-model="diserahTarikh">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="diambilNama" class="form-label form-label-sm">Diambil-balik oleh
-                                Nama</label>
-                            <input type="text" class="form-control form-control-sm" id="diambilNama"
-                                v-model="diambilNama">
+                            <label for="diambilNama" class="form-label form-label-sm">Diambil-balik oleh Nama</label>
+                            <input type="text" class="form-control form-control-sm" id="diambilNama" v-model="diambilNama">
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="diambilBhg" class="form-label form-label-sm">Diambil-balik oleh
-                                Bhg</label>
-                            <input type="text" class="form-control form-control-sm" id="diambilBhg"
-                                v-model="diambilBhg">
+                            <label for="diambilBhg" class="form-label form-label-sm">Diambil-balik oleh Bhg</label>
+                            <input type="text" class="form-control form-control-sm" id="diambilBhg" v-model="diambilBhg">
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="diambilTarikh" class="form-label form-label-sm">Diambil-balik
-                                oleh Tarikh</label>
-                            <input type="date" class="form-control form-control-sm" id="diambilTarikh"
-                                v-model="diambilTarikh">
+                            <label for="diambilTarikh" class="form-label form-label-sm">Diambil-balik oleh Tarikh</label>
+                            <input type="date" class="form-control form-control-sm" id="diambilTarikh" v-model="diambilTarikh">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <label for="masalahPemohon" class="form-label form-label-sm">Masalah</label>
-                            <textarea class="form-control form-control-sm" id="masalahPemohon"
-                                v-model="masalahPemohon"></textarea>
+                            <textarea class="form-control form-control-sm" id="masalahPemohon" v-model="masalahPemohon"></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="penerimaNama" class="form-label form-label-sm">Penerima
-                                Nama</label>
-                            <input type="text" class="form-control form-control-sm" id="penerimaNama"
-                                v-model="penerimaNama">
+                            <label for="penerimaNama" class="form-label form-label-sm">Penerima Nama</label>
+                            <input type="text" class="form-control form-control-sm" id="penerimaNama" v-model="penerimaNama">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="penerimaTarikh" class="form-label form-label-sm">Penerima
-                                Tarikh</label>
-                            <input type="date" class="form-control form-control-sm" id="penerimaTarikh"
-                                v-model="penerimaTarikh">
+                            <label for="penerimaTarikh" class="form-label form-label-sm">Penerima Tarikh</label>
+                            <input type="date" class="form-control form-control-sm" id="penerimaTarikh" v-model="penerimaTarikh">
                         </div>
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary" @click="save">Save Report</button>
             </div>
-
-            <button class="btn btn-primary mb-3" type="submit" @click="qrcode" th:if="${user}">QR Code</button>
-
+            <button class="btn btn-dark mt-5" type="submit" @click="qrcode" th:if="${user}">QR Code</button>
         </div>
-
-
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.js"></script>      
-
-
-            <script>
-                $(document).ready(function () {
-                    var app = Vue.createApp({
-                        data() {
-                            return {
-                                modelPeralatan: '',
-                                noSiri: '',
-                                diserahNama: '',
-                                diserahBhg: '',
-                                diserahTarikh: new Date().toISOString().split('T')[0],
-                                diambilNama: '',
-                                diambilBhg: '',
-                                diambilTarikh: '',
-                                masalahPemohon: '',
-                                penerimaNama: '',
-                                penerimaTarikh: '',
-                            };
-                        },
-                        methods: {
-
-                            save() {
-                                var data = {
-                                    modelPeralatan: this.modelPeralatan,
-                                    noSiri: this.noSiri,
-                                    diserahNama: this.diserahNama,
-                                    diserahBhg: this.diserahBhg,
-                                    diserahTarikh: this.diserahTarikh,
-                                    diambilNama: this.diambilNama,
-                                    diambilBhg: this.diambilBhg,
-                                    diambilTarikh: this.diambilTarikh,
-                                    masalahPemohon: this.masalahPemohon,
-                                    penerimaNama: this.penerimaNama,
-                                    penerimaTarikh: this.penerimaTarikh,
-
-                                }
-                                $.post({
-                                    url: `[[@{/repairform/save}]]`,
-                                    data: JSON.stringify(data),
-                                    dataType: "json",
-                                    contentType: "application/json; charset=utf-8",
-                                    success: function (res) {
-                                        window.location.reload();
-                                    }
-                                }
-                                )
-
-                            },
-                            qrcode(){
-                                $.post({
-                                url: `[[@{/qrcode/generate}]]`,
-                                contentType: "application/json; charset=utf-8",
-                                success: function (res) {
-                                    console.log(res);
-                                }}
-                                )
-                            }
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.js"></script>
+    <script>
+        $(document).ready(function () {
+            var app = Vue.createApp({
+                data() {
+                    return {
+                        modelPeralatan: '',
+                        noSiri: '',
+                        diserahNama: '',
+                        diserahBhg: '',
+                        diserahTarikh: new Date().toISOString().split('T')[0],
+                        diambilNama: '',
+                        diambilBhg: '',
+                        diambilTarikh: '',
+                        masalahPemohon: '',
+                        penerimaNama: '',
+                        penerimaTarikh: '',
+                    };
+                },
+                methods: {
+                    save() {
+                        var data = {
+                            modelPeralatan: this.modelPeralatan,
+                            noSiri: this.noSiri,
+                            diserahNama: this.diserahNama,
+                            diserahBhg: this.diserahBhg,
+                            diserahTarikh: this.diserahTarikh,
+                            diambilNama: this.diambilNama,
+                            diambilBhg: this.diambilBhg,
+                            diambilTarikh: this.diambilTarikh,
+                            masalahPemohon: this.masalahPemohon,
+                            penerimaNama: this.penerimaNama,
+                            penerimaTarikh: this.penerimaTarikh,
                         }
-                    });
-                    app.mount("#new-form-app");
-                });
-            </script>
+                        $.post({
+                            url: `[[@{/repairform/save}]]`,
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (res) {
+                                window.location.reload();
+                            }
+                        })
+                    },
+                    qrcode() {
+                        $.post({
+                            url: `[[@{/qrcode/generate}]]`,
+                            contentType: "application/json; charset=utf-8",
+                            success: function (res) {
+                                console.log(res);
+                            }
+                        })
+                    }
+                }
+            });
+            app.mount("#new-form-app");
+        });
+    </script>
 </body>
 
 </html>
