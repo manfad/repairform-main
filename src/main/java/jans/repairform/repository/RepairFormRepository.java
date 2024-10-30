@@ -26,12 +26,13 @@ public interface RepairFormRepository extends JpaRepository<RepairForm,Integer>{
     Page<RepairForm> findByFormStatus(Pageable pageable,String status);
 
     Page<RepairForm> findByDiserahNama(Pageable pageable,String diserahNama);
+    Page<RepairForm> findByDiserahBhg(Pageable pageable,String diserahBhg);
 
     Page<RepairForm> findByCreatedDate(Pageable pageable,LocalDate startDate);
     Page<RepairForm> findByCreatedDateBetween(Pageable pageable,LocalDate startDate,LocalDate endDate);
 
-    @Query(value="SELECT diserah_nama FROM repairform ", nativeQuery = true)
-    List<String> getDiSerahNama();
+    @Query(value="SELECT diserah_bhg FROM repairform ", nativeQuery = true)
+    List<String> getDiserahBhg();
 
     Page<RepairForm> findAllByOrderByCreatedDateDesc(Pageable pageable);
 

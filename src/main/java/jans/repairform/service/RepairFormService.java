@@ -24,6 +24,22 @@ public class RepairFormService {
 
         Response res = new Response();
         RepairForm newData ;
+
+        if(form.getDiserahBhg() == null || form.getDiserahBhg().trim().isEmpty()) {
+            res.setMessage("Missing input");
+            return res;
+        }
+        
+        if(form.getDiserahNama() == null || form.getDiserahNama().trim().isEmpty()) {
+            res.setMessage("Missing input");
+            return res;
+        }
+        
+        if(form.getModelPeralatan() == null || form.getModelPeralatan().trim().isEmpty()) {
+            res.setMessage("Missing input");
+            return res;
+        }
+
         if(form.getFormId() != null){
             newData = repo.findByFormId(form.getFormId());
             

@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>New Repair Form</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" th:href="@{libs/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{libs/css/jquery.dataTables.min.css}">
     <style>
         .form-label-sm {
             font-size: 0.875rem;
@@ -42,7 +42,11 @@
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="diserahNama" class="form-label form-label-sm">Diserah oleh Nama</label>
-                            <select class="form-control form-control-sm" id="diserahNama" v-model="diserahNama">
+                            <input type="text" class="form-control form-control-sm" id="diserahNama" v-model="diserahNama" :disabled="isView">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="diserahBhg" class="form-label form-label-sm">Diserah oleh Bhg</label>
+                            <select class="form-select form-select-sm" id="diserahBhg" v-model="diserahBhg" :disabled="isView">
                                 <option value="">Select an option</option>
                                 <option value="Kota Kinabalu">Kota Kinabalu</option>
                                 <option value="Sandakan">Sandakan</option>
@@ -83,10 +87,6 @@
                                 <option value="NABALU">NABALU</option>
                                 <option value="Head Quarter">Head Quarter</option>
                             </select>
-                        </div>                        
-                        <div class="col-md-4 mb-3">
-                            <label for="diserahBhg" class="form-label form-label-sm">Diserah oleh Bhg</label>
-                            <input type="text" class="form-control form-control-sm" id="diserahBhg" v-model="diserahBhg">
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="diserahTarikh" class="form-label form-label-sm">Diserah oleh Tarikh</label>
@@ -100,7 +100,47 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="diambilBhg" class="form-label form-label-sm">Diambil-balik oleh Bhg</label>
-                            <input type="text" class="form-control form-control-sm" id="diambilBhg" v-model="diambilBhg">
+                            <select class="form-select form-select-sm" id="diambilBhg" v-model="diambilBhg" :disabled="isView">
+                                <option value="">Select an option</option>
+                                <option value="Kota Kinabalu">Kota Kinabalu</option>
+                                <option value="Sandakan">Sandakan</option>
+                                <option value="Tawau">Tawau</option>
+                                <option value="Semporna">Semporna</option>
+                                <option value="Lahad Datu">Lahad Datu</option>
+                                <option value="Kudat">Kudat</option>
+                                <option value="Kota Belud">Kota Belud</option>
+                                <option value="Tuaran">Tuaran</option>
+                                <option value="Papar">Papar</option>
+                                <option value="Beaufort">Beaufort</option>
+                                <option value="Tenom">Tenom</option>
+                                <option value="Keningau">Keningau</option>
+                                <option value="Kemabong">Kemabong</option>
+                                <option value="Tamparuli">Tamparuli</option>
+                                <option value="Ranau">Ranau</option>
+                                <option value="Sipitang">Sipitang</option>
+                                <option value="Weston">Weston</option>
+                                <option value="Kuala Penyu">Kuala Penyu</option>
+                                <option value="Membakut">Membakut</option>
+                                <option value="Kunak">Kunak</option>
+                                <option value="Pitas">Pitas</option>
+                                <option value="Tambunan">Tambunan</option>
+                                <option value="Nabawan">Nabawan</option>
+                                <option value="Bingkor">Bingkor</option>
+                                <option value="Kota Marudu">Kota Marudu</option>
+                                <option value="Beluran">Beluran</option>
+                                <option value="Kinabatangan">Kinabatangan</option>
+                                <option value="TELUPID">TELUPID</option>
+                                <option value="Sook">Sook</option>
+                                <option value="Tunku">Tunku</option>
+                                <option value="Tongod">Tongod</option>
+                                <option value="Pinangah">Pinangah</option>
+                                <option value="Merotai">Merotai</option>
+                                <option value="Tungku">Tungku</option>
+                                <option value="Sebatik">Sebatik</option>
+                                <option value="PULAU BANGGI">PULAU BANGGI</option>
+                                <option value="NABALU">NABALU</option>
+                                <option value="Head Quarter">Head Quarter</option>
+                            </select>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="diambilTarikh" class="form-label form-label-sm">Diambil-balik oleh Tarikh</label>
@@ -129,11 +169,11 @@
             <button class="btn btn-dark mt-5" type="submit" @click="qrcode" th:if="${user}">QR Code</button>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.js"></script>
+    <script th:src="@{libs/js/sweetalert2.min.js}"></script>
+    <script th:src="@{libs/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{libs/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{libs/js/jquery.datatables.min.js}"></script>
+    <script th:src="@{libs/js/vue.global.js}"></script>
     <script>
         $(document).ready(function () {
             var app = Vue.createApp({
@@ -173,7 +213,33 @@
                             dataType: "json",
                             contentType: "application/json; charset=utf-8",
                             success: function (res) {
-                                window.location.reload();
+                                if(res.success){
+                                    Swal.fire({
+                                        title: 'Success!',
+                                        text: 'Form has been submitted successfully',
+                                        icon: 'success',
+                                        confirmButtonText: 'OK'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.reload();
+                                        }
+                                    });
+                                }else{
+                                    Swal.fire({
+                                    title: 'Error!',
+                                    text: res.message,
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Something went wrong while submitting the form',
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                });
                             }
                         })
                     },
@@ -182,7 +248,24 @@
                             url: `[[@{/qrcode/generate}]]`,
                             contentType: "application/json; charset=utf-8",
                             success: function (res) {
-                                console.log(res);
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: 'QR code has been generated successfully',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.reload();
+                                    }
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Something went wrong ',
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                });
                             }
                         })
                     }

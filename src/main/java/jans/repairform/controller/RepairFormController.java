@@ -44,7 +44,7 @@ public class RepairFormController {
      @RequestParam(required = false) LocalDate endDate,
      @RequestParam(required = false) String diserahSearch){
        
-        String[] cols = new String[]{"modelPeralatan","createdDate","diserahNama","formStatus",""};
+        String[] cols = new String[]{"modelPeralatan","createdDate","diserahNama","diserahBhg","formStatus",""};
 
         DataTable<RepairForm> table = new DataTable<>();
         Page<RepairForm> list;
@@ -58,7 +58,7 @@ public class RepairFormController {
             } else if (condition.equals("date")) {
                 list = repo.findByCreatedDateBetween( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),startDate,endDate);
             } else if (condition.equals("diserah")) {
-                list = repo.findByDiserahNama( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),diserahSearch);
+                list = repo.findByDiserahBhg( PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])),diserahSearch);
             } else {
                 list = repo.findAllByOrderByCreatedDateDesc(PageRequest.of(start / length, length, Sort.by(Direction.fromString(orderDir), cols[orderCol])));
             }

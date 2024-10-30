@@ -30,8 +30,8 @@ public class IndexController {
 
         String name = userService.getCurrentUsername();
         model.addAttribute("name", name);
-        List<String> diserahNama = repo.getDiSerahNama();
-        model.addAttribute("diserahNama", diserahNama);
+        List<String> diserahBhg = repo.getDiserahBhg();
+        model.addAttribute("diserahBhg", diserahBhg);
         return "index";
     }
 
