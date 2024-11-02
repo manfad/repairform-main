@@ -1113,8 +1113,8 @@ KOTA KINABALU, SABAH.]]></text>
 					<text><![CDATA[No . Siri/ Inventori (JANS)	:]]></text>
 				</staticText>
 				<image>
-					<reportElement x="251" y="11" width="50" height="50" uuid="4b2f638c-0514-49ec-b9fe-b69deef2c4fa"/>
-					<imageExpression><![CDATA["logo.jpg"]]></imageExpression>
+					<reportElement x="251" y="11" width="50" height="46" uuid="4b2f638c-0514-49ec-b9fe-b69deef2c4fa"/>
+					<imageExpression><![CDATA["jasper/logo.jpg"]]></imageExpression>
 				</image>
 			</frame>
 		</band>

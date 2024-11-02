@@ -588,6 +588,7 @@
                                             <button class="btn btn-sm btn-primary" @click="editForm('${row.formId}')">Edit</button>
                                             <button class="btn btn-sm btn-danger" @click="deleteForm('${row.formId}')">Delete</button>
                                             <button class="btn btn-sm btn-secondary" @click="printForm('${row.formId}')">Print</button>
+                                            <button class="btn btn-sm btn-info" @click="printQR('${row.formId}')">QR</button>
                                             ${data.formStatus !== 'C' ? `<button class="btn btn-sm btn-success" @click="editReport('${row.formId}')">Complete</button>` : ''}`;
                                     }
                                 }
@@ -639,6 +640,13 @@
                             const data = reportTable.row($(event.target).closest('tr')).data();
                             if (data) {
                                 this.openPdfModal(data.formId);
+                            }
+                        });
+                        reportTable.on('click', 'button.btn-info', (event) => {
+                            event.preventDefault();
+                            const data = reportTable.row($(event.target).closest('tr')).data();
+                            if (data) {
+                                this.openQrModal(data.formId);
                             }
                         });
                     },
@@ -912,6 +920,10 @@
                         })
                     },
                     openPdfModal(id) {
+                        window.open(`[[@{/repairform/pdf}]]?formid=` + id, '_blank', 'location=yes, height=1080, width=1000, scrollbars=yes, status=yes');
+
+                    },
+                    openQrModal(id) {
                         $.post('/qrcode/generate-pdf-qr', { formid: id })
                         .done(function(response) {
                             if(response.success) {
@@ -922,8 +934,6 @@
                                         <img src="/qrcode/image/${response.data}" width="250" height="250">
                                     </div>
                                 `);
-                            } else {
-                                alert(response.message);
                             }
                         });
                     },
