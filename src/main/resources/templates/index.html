@@ -912,8 +912,20 @@
                         })
                     },
                     openPdfModal(id) {
-                        console.log(id);
-                        window.open(`[[@{/repairform/pdf}]]?formid=` + id, '_blank', 'location=yes, height=1080, width=1000, scrollbars=yes, status=yes');
+                        $.post('/qrcode/generate-pdf-qr', { formid: id })
+                        .done(function(response) {
+                            if(response.success) {
+                                let qrWindow = window.open('', 'QRCode', 'width=300,height=350');
+                                qrWindow.document.write(`
+                                    <div style="text-align:center;padding:20px;">
+                                        <h4>Scan to view PDF</h4>
+                                        <img src="/qrcode/image/${response.data}" width="250" height="250">
+                                    </div>
+                                `);
+                            } else {
+                                alert(response.message);
+                            }
+                        });
                     },
                     qrcode() {
                         $.post({

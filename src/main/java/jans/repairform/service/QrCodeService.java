@@ -46,4 +46,25 @@ public class QrCodeService {
         return filePath;
     }
     
+    public QrCode generateQRCodePDF(String url) throws Exception {
+        String fileName = "QRCode_" + System.currentTimeMillis() + ".png";
+        String filePath = qrCodeImagePath + fileName;
+
+        // Create QR code directory if not exists
+        Path directoryPath = Paths.get(qrCodeImagePath);
+        if (!directoryPath.toFile().exists()) {
+            directoryPath.toFile().mkdirs();
+        }
+
+        // Generate QR code
+        BitMatrix matrix = new MultiFormatWriter().encode(url, BarcodeFormat.QR_CODE, 250, 250);
+        Path path = FileSystems.getDefault().getPath(filePath);
+        MatrixToImageWriter.writeToPath(matrix, "PNG", path);
+
+        // Save to database
+        QrCode qrCode = new QrCode();
+        qrCode.setQrcodeURL(url);
+        qrCode.setQrcodePath(filePath);
+        return qrcodeRepo.save(qrCode);
+    }
 }

@@ -1,17 +1,24 @@
 package jans.repairform.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jans.repairform.model.QrCode;
 import jans.repairform.model.Response;
 import jans.repairform.repository.QrCodeRepository;
@@ -53,6 +60,40 @@ public class QrCodeController {
             // If the QR code does not exist, show an error message
             model.addAttribute("error", "Invalid QR Code.");
             return "error";
+        }
+    }
+    @PostMapping("/generate-pdf-qr")
+    public @ResponseBody Response generatePdfQRCode(@RequestParam String formid, 
+                                                  HttpServletRequest request) {
+        Response res = new Response();
+        try {
+            // Create PDF URL with full domain
+            String pdfUrl = request.getScheme() + "://" + 
+                          request.getServerName() + ":" + 
+                          request.getServerPort() + 
+                          "/repairform/pdf?formid=" + formid;
+            
+            QrCode qrCode = qrCodeService.generateQRCodePDF(pdfUrl);
+            
+            res.setSuccess(true);
+            res.setData(qrCode.getId());
+
+        } catch (Exception e) {
+            res.setSuccess(false);
+        }
+        return res;
+    }
+
+    @GetMapping("/image/{id}")
+    public void getQRCodeImage(@PathVariable Long id, HttpServletResponse response) 
+            throws IOException {
+        try {
+            QrCode qrCode = qrCodeRepo.findById(id).orElseThrow();
+            Path path = Paths.get(qrCode.getQrcodePath());
+            response.setContentType(MediaType.IMAGE_PNG_VALUE);
+            Files.copy(path, response.getOutputStream());
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 }

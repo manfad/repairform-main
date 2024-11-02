@@ -20,7 +20,15 @@ public class SecurityConfig {
 
 		http
 			.authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/login", "/register","/newform","/qrcode/**","/repairform/save").permitAll() 
+			.requestMatchers(
+				"/login", 
+				"/register",
+				"/newform",
+				"/qrcode/**",              // QR code endpoints
+				"/repairform/pdf",         // PDF viewing endpoint
+				"/repairform/save"
+			).permitAll() 
+			.requestMatchers("/libs/**").permitAll() // Allow access to resources in /libs
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
