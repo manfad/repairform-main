@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code</title>
+    <style>
+        body {
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div >
+        <h4 class="text-primary">Scan to view PDF</h4>
+    </div>
+    <div>
+        <img th:src="${qrCodeImage}" width="250" height="250" alt="QR Code" />
+    </div>
+    <div th:if="${error}">
+        <p th:text="${error}"></p>
+    </div>
+</body>
+</html>
