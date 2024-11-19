@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
-
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jans.repairform.model.QrCode;
-import jans.repairform.model.Response;
 import jans.repairform.repository.QrCodeRepository;
 import jans.repairform.service.QrCodeService;
 
@@ -30,42 +29,14 @@ public class QrCodeController {
 
     @Autowired QrCodeService qrCodeService;
     @Autowired QrCodeRepository qrCodeRepo;
-
+    @Value("${qr.code.image.path}")
+    private String qrCodeImagePath;
    
-    @PostMapping("generate")
-    public @ResponseBody Response generateQRCode(HttpServletRequest request, Model model) {
-        Response res = new Response();
-        try {
-            // Get the current page URL
-            String currentUrl = request.getHeader("Referer");
-
-            // Generate QR code for the current page URL
-            qrCodeService.generateQRCode(currentUrl);
-
-            res.setMessage("QRCODE generated success");
-            res.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            res.setMessage("QRCODE generated failed");
-        }
-        return res;
-    }
-    @GetMapping("/qr/{id}")
-    public String redirectToOriginalUrl(@PathVariable Long id, Model model) {
-        Optional<QrCode> qrCode = qrCodeRepo.findById(id);
-        if (qrCode.isPresent()) {
-            // Redirect to the original URL stored in the QR code
-            return "redirect:" + qrCode.get().getQrcodeURL();
-        } else {
-            // If the QR code does not exist, show an error message
-            model.addAttribute("error", "Invalid QR Code.");
-            return "error";
-        }
-    }
     @PostMapping("/generate-pdf-qr")
-    public @ResponseBody Response generatePdfQRCode(@RequestParam String formid, 
-                                                  HttpServletRequest request) {
-        Response res = new Response();
+    public @ResponseBody Map<String, Object> generatePdfQRCode(
+            @RequestParam String formid, 
+            HttpServletRequest request) {
+        Map<String, Object> response = new HashMap<>();
         try {
             // Create PDF URL with full domain
             String pdfUrl = request.getScheme() + "://" + 
@@ -73,27 +44,84 @@ public class QrCodeController {
                           request.getServerPort() + 
                           "/repairform/pdf?formid=" + formid;
             
-            QrCode qrCode = qrCodeService.generateQRCodePDF(pdfUrl);
+            QrCode qrCode = qrCodeService.qrGenerate(pdfUrl);
             
-            res.setSuccess(true);
-            res.setData(qrCode.getId());
-
+            response.put("success", true);
+            response.put("qrCodeId", qrCode.getId());
+            
         } catch (Exception e) {
-            res.setSuccess(false);
+            e.printStackTrace();
+            response.put("success", false);
+            response.put("error", "Failed to generate QR code");
         }
-        return res;
+        return response;
     }
-
+    
+    @GetMapping("/view/pdf/{id}")
+    public String showPdfQRCode(@PathVariable Long id, Model model) {
+        QrCode qrCode = qrCodeRepo.findById(id)
+                .orElse(null);
+        
+        if (qrCode != null) {
+            model.addAttribute("qrCodeImage", "/qrcode/image/" + qrCode.getId());
+            model.addAttribute("title", "Scan to view PDF");
+        } else {
+            model.addAttribute("error", "QR Code not found");
+        }
+        
+        return "qrcodeView";
+    }
+    
+    @GetMapping("/view/page/{id}")
+    public String showPageQRCode(@PathVariable Long id, Model model) {
+        QrCode qrCode = qrCodeRepo.findById(id)
+                .orElse(null);
+        
+        if (qrCode != null) {
+            model.addAttribute("qrCodeImage", "/qrcode/image/" + qrCode.getId());
+            model.addAttribute("title", "Scan to visit page");
+        } else {
+            model.addAttribute("error", "QR Code not found");
+        }
+        
+        return "qrcodeView";
+    }
+    
+    // Common image serving endpoint
     @GetMapping("/image/{id}")
     public void getQRCodeImage(@PathVariable Long id, HttpServletResponse response) 
             throws IOException {
-        try {
-            QrCode qrCode = qrCodeRepo.findById(id).orElseThrow();
-            Path path = Paths.get(qrCode.getQrcodePath());
-            response.setContentType(MediaType.IMAGE_PNG_VALUE);
-            Files.copy(path, response.getOutputStream());
-        } catch (Exception e) {
+        QrCode qrCode = qrCodeRepo.findById(id)
+                .orElse(null);
+        
+        if (qrCode != null) {
+            Path imagePath = Paths.get(qrCodeImagePath, qrCode.getQrcodePath());
+            if (Files.exists(imagePath)) {
+                response.setContentType("image/png");
+                Files.copy(imagePath, response.getOutputStream());
+                response.getOutputStream().flush();
+            } else {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            }
+        } else {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
+    }
+
+    @PostMapping("/generate-page-qr")
+    public @ResponseBody Map<String, Object> generatePageQRCode(
+            @RequestParam String pageUrl) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            QrCode qrCode = qrCodeService.qrGenerate(pageUrl);
+            
+            response.put("success", true);
+            response.put("qrCodeId", qrCode.getId());
+            
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("error", "Failed to generate page QR code");
+        }
+        return response;
     }
 }

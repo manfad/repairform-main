@@ -41,7 +41,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" href="/logout">Logout</a>
+                                <a class="dropdown-item" th:href="@{/logout}">Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -924,44 +924,34 @@
 
                     },
                     openQrModal(id) {
-                        $.post('/qrcode/generate-pdf-qr', { formid: id })
-                        .done(function(response) {
-                            if(response.success) {
-                                let qrWindow = window.open('', 'QRCode', 'width=300,height=350');
-                                qrWindow.document.write(`
-                                    <div style="text-align:center;padding:20px;">
-                                        <h4>Scan to view PDF</h4>
-                                        <img src="/qrcode/image/${response.data}" width="250" height="250">
-                                    </div>
-                                `);
-                            }
-                        });
+                        $.post(` [[@{/qrcode/generate-pdf-qr}]]?formid=`+id)
+                            .done(function (response) {
+                                if (response.success) {
+                                    let qrWindow = window.open(`[[@{/qrcode/view/pdf/}]]` + response.qrCodeId,
+                                        'QRCode',
+                                        'width=300,height=400');
+                                } else {
+                                    alert(response.error || 'Failed to generate QR code');
+                                }
+                            });
+                           
                     },
                     qrcode() {
-                        $.post({
-                            url: `[[@{/qrcode/generate}]]`,
-                            contentType: "application/json; charset=utf-8",
-                            success: function (res) {
-                                Swal.fire({
-                                    title: 'Success!',
-                                    text: 'QrCode has been created successfully',
-                                    icon: 'success',
-                                    confirmButtonText: 'OK'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        window.location.reload();
-                                    }
-                                });
-                            },
-                            error: function(xhr, status, error) {
-                                Swal.fire({
-                                    title: 'Error!',
-                                    text: 'Something went wrong',
-                                    icon: 'error',
-                                    confirmButtonText: 'OK'
-                                });
-                            }
+                        $.post(` [[@{/qrcode/generate-page-qr}]]?formid=`, {
+                            pageUrl: window.location.href
                         })
+                            .done(function (response) {
+                                if (response.success) {
+                                    let qrWindow = window.open(`[[@{/qrcode/view/page/}]]` + response.qrCodeId,
+                                        'QRCode',
+                                        'width=300,height=400');
+                                } else {
+                                    alert(response.error || 'Failed to generate QR code');
+                                }
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                alert('Error generating QR code: ' + textStatus);
+                            });
                     }
                 },
             });

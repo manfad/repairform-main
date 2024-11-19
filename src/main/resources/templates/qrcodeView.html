@@ -1,25 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code</title>
     <style>
-        body {
+        .qr-container {
             text-align: center;
             padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .qr-container h4 {
+            color: #2196F3;
+            margin-bottom: 20px;
+        }
+        .qr-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        .error-message {
+            color: #f44336;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div >
-        <h4 class="text-primary">Scan to view PDF</h4>
-    </div>
-    <div>
-        <img th:src="${qrCodeImage}" width="250" height="250" alt="QR Code" />
-    </div>
-    <div th:if="${error}">
-        <p th:text="${error}"></p>
+    <div class="qr-container">
+        <h4 class="text-primary" th:text="${title}">Scan QR Code</h4>
+        <div th:if="${qrCodeImage}">
+            <img th:src="${qrCodeImage}" width="250" height="250" alt="QR Code" />
+        </div>
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
     </div>
 </body>
 </html>

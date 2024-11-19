@@ -8,6 +8,6 @@ import jans.repairform.model.QrCode;
 @Repository
 public interface QrCodeRepository extends JpaRepository<QrCode,Long>{
 
-    
-    
+    QrCode findByQrcodeURL(String qrcodeURL);
+
 }
