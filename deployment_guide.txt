@@ -1,0 +1,76 @@
+TOMCAT 10 DEPLOYMENT GUIDE FOR REPAIR FORM APPLICATION
+====================================================
+
+1. PREREQUISITES
+---------------
+- Java 17
+- Apache Tomcat 10
+- MySQL Database
+- Maven
+
+2. BUILD CONFIGURATION
+---------------------
+a) Check pom.xml has:
+   - <packaging>war</packaging>
+   - Spring Boot Tomcat starter with provided scope
+   - Correct finalName: <finalName>repairform</finalName>
+
+b) Configure application.properties:
+   - Set QR code path: qr.code.image.path=${catalina.home}/webapps/repairform/qrcodes
+   - Configure static resources: spring.web.resources.static-locations=classpath:/static/,file:${qr.code.image.path}
+   - Comment out server.port and server.address
+
+3. DIRECTORY SETUP
+-----------------
+a) Create QR code directory in Tomcat:
+   cd $CATALINA_HOME/webapps/
+   mkdir -p repairform/qrcodes
+   chmod 755 repairform/qrcodes
+
+b) Set proper permissions:
+   chmod -R 755 $CATALINA_HOME/webapps/repairform
+   chown -R tomcat:tomcat $CATALINA_HOME/webapps/repairform
+
+4. BUILD AND DEPLOY
+------------------
+a) Build WAR file:
+   mvn clean package
+
+b) Deploy to Tomcat:
+   - Copy WAR file: cp target/repairform.war $CATALINA_HOME/webapps/
+   - OR manually upload through Tomcat Manager
+
+5. DATABASE SETUP
+----------------
+- Ensure MySQL is running
+- Create database: repairform
+- Update application.properties with correct database credentials
+
+6. VERIFY DEPLOYMENT
+-------------------
+a) Check Tomcat logs:
+   tail -f $CATALINA_HOME/logs/catalina.out
+
+b) Access application:
+   http://your-server:8080/repairform
+
+7. TROUBLESHOOTING
+-----------------
+a) Check permissions:
+   - Tomcat user needs write access to qrcodes directory
+   - Verify file permissions: ls -l $CATALINA_HOME/webapps/repairform/qrcodes
+
+b) Common issues:
+   - 404: Check context path and WAR deployment
+   - 500: Check logs for detailed error messages
+   - QR Code issues: Verify directory permissions and paths
+
+8. MAINTENANCE
+-------------
+- Monitor logs regularly
+- Backup database periodically
+- Check disk space for QR codes directory
+- Keep Tomcat and application updated
+
+Note: Replace $CATALINA_HOME with your actual Tomcat installation path
+==================================================== 

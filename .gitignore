@@ -33,3 +33,6 @@ build/
 .vscode/
 
 images/
+
+# External QR codes directory
+/opt/repairform/qrcodes/

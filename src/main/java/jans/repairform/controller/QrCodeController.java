@@ -38,13 +38,13 @@ public class QrCodeController {
             HttpServletRequest request) {
         Map<String, Object> response = new HashMap<>();
         try {
-            // Create PDF URL with full domain
-            String pdfUrl = request.getScheme() + "://" + 
+            // Create base URL for PDF
+            String baseUrl = request.getScheme() + "://" + 
                           request.getServerName() + ":" + 
                           request.getServerPort() + 
-                          "/repairform/pdf?formid=" + formid;
+                          "/repairform/pdf?formid=";
             
-            QrCode qrCode = qrCodeService.qrGenerate(pdfUrl);
+            QrCode qrCode = qrCodeService.qrGenerate(formid, baseUrl);
             
             response.put("success", true);
             response.put("qrCodeId", qrCode.getId());
@@ -98,6 +98,7 @@ public class QrCodeController {
             Path imagePath = Paths.get(qrCodeImagePath, qrCode.getQrcodePath());
             if (Files.exists(imagePath)) {
                 response.setContentType("image/png");
+                response.setHeader("Cache-Control", "public, max-age=31536000");
                 Files.copy(imagePath, response.getOutputStream());
                 response.getOutputStream().flush();
             } else {
@@ -110,10 +111,11 @@ public class QrCodeController {
 
     @PostMapping("/generate-page-qr")
     public @ResponseBody Map<String, Object> generatePageQRCode(
-            @RequestParam String pageUrl) {
+            @RequestParam String pageUrl,
+            @RequestParam String id) {
         Map<String, Object> response = new HashMap<>();
         try {
-            QrCode qrCode = qrCodeService.qrGenerate(pageUrl);
+            QrCode qrCode = qrCodeService.qrGenerate(id, pageUrl);
             
             response.put("success", true);
             response.put("qrCodeId", qrCode.getId());

@@ -17,6 +17,38 @@
             line-height: 1.5;
             border-radius: 0.2rem;
         }
+        .popover {
+            max-width: 400px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .popover-body {
+            padding: 15px;
+            min-width: 250px;
+        }
+        
+        .popover-body .row {
+            margin: 0;
+            padding: 5px 0;
+        }
+        
+        .popover-body strong {
+            color: #495057;
+            display: inline-block;
+            margin-bottom: 3px;
+        }
+        
+        .popover-body .col-12 {
+            padding: 0;
+        }
+        
+        .table tbody tr:hover {
+            cursor: pointer;
+            background-color: #f5f5f5;
+        }
+        
+        
+    
     </style>
 </head>
 <body>
@@ -470,6 +502,29 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="specModal" tabindex="-1" aria-labelledby="specModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="specModalLabel">Add Specification</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="specName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="specName" v-model="specName">
+                            </div>
+                            <div class="mb-3">
+                                <label for="specDetails" class="form-label">Specification Details</label>
+                                <textarea class="form-control" id="specDetails" rows="3" v-model="specDetails"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" @click="saveSpec">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script th:src="@{libs/js/sweetalert2.min.js}"></script>
@@ -530,6 +585,9 @@
                         endDate: new Date().toISOString().split('T')[0],
                         isView: false,
                         diserahSearch: '',
+                        specName: '',
+                        specDetails: '',
+                        currentFormId: '',
                     }
                 },
                 mounted() {
@@ -584,17 +642,25 @@
                                 {
                                     "data": null,
                                     "render": function (data, type, row) {
-                                        return `<button class="btn btn-sm btn-warning" @click="viewForm('${row.formId}')">View</button>
-                                            <button class="btn btn-sm btn-primary" @click="editForm('${row.formId}')">Edit</button>
-                                            <button class="btn btn-sm btn-danger" @click="deleteForm('${row.formId}')">Delete</button>
-                                            <button class="btn btn-sm btn-secondary" @click="printForm('${row.formId}')">Print</button>
-                                            <button class="btn btn-sm btn-info" @click="printQR('${row.formId}')">QR</button>
-                                            ${data.formStatus !== 'C' ? `<button class="btn btn-sm btn-success" @click="editReport('${row.formId}')">Complete</button>` : ''}`;
+                                        let buttons = `
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-sm btn-warning view-btn me-1" data-id="${data.formId}">View</button>
+                                                <button class="btn btn-sm btn-primary edit-btn me-1" data-id="${data.formId}">Edit</button>
+                                                <button class="btn btn-sm btn-danger delete-btn me-1" data-id="${data.formId}">Delete</button>
+                                                <button class="btn btn-sm btn-secondary print-btn me-1" data-id="${data.formId}">Print</button>
+                                                <button class="btn btn-sm btn-info qr-btn me-1" data-id="${data.formId}">QR</button>
+                                                <button class="btn btn-sm btn-dark spec-btn me-1" data-id="${data.formId}">Spec</button>`;
+                                                
+                                        if (data.formStatus !== 'C') {
+                                            buttons += `<button class="btn btn-sm btn-success complete-btn me-1" data-id="${data.formId}">Complete</button>`;
+                                        }
+                                                
+                                        buttons += `</div>`;
+                                        return buttons;
                                     }
                                 }
                             ],
                             "rowCallback": function (row, data) {
-
                                 if (new Date(data.createdDate).toDateString() === new Date().toDateString()) {
                                     if (data.formStatus === "C") {
                                         $(row).addClass('table-success');
@@ -602,52 +668,115 @@
                                         $(row).addClass('table-warning');
                                     }
                                 }
+                                
+                                $.get(`[[@{/spec/get/}]]${data.formId}`)
+                                    .done(function(specs) {
+                                        $(row).popover({
+                                            trigger: 'hover',
+                                            placement: 'left',
+                                            html: true,
+                                            content: `
+                                                <div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-12">
+                                                            <strong>Model:</strong><br/>
+                                                            ${data.modelPeralatan || 'N/A'}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-12">
+                                                            <strong>Name:</strong><br/>
+                                                            ${specs ? specs.specName || 'N/A' : 'No specification'}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <strong>Description:</strong><br/>
+                                                            ${specs ? specs.specDesc || 'N/A' : 'No description'}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            `
+                                        });
+                                    })
+                                    .fail(function() {
+                                        $(row).popover({
+                                            trigger: 'hover',
+                                            placement: 'left',
+                                            html: true,
+                                            content: `
+                                                <div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-12">
+                                                            <strong>Model:</strong><br/>
+                                                            ${data.modelPeralatan || 'N/A'}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-12">
+                                                            <strong>Name:</strong><br/>
+                                                            No specification available
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <strong>Description:</strong><br/>
+                                                            No description available
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            `
+                                        });
+                                    });
+                                
+                                $(row).on('remove', function() {
+                                    $(this).popover('dispose');
+                                });
                             }
                         });
 
                         $('#searchDateModal').modal('hide');
 
-                        reportTable.on('click', 'button.btn-success', (event) => {
-                            event.preventDefault();
-                            const data = reportTable.row($(event.target).closest('tr')).data();
-                            if (data) {
-                                this.completeForm(data.formId);
-                            }
+                        $('#reportTable').on('click', '.view-btn', function(e) {
+                            e.preventDefault();
+                            const formId = $(this).data('id');
+                            self.viewForm(formId);
                         });
-                        reportTable.on('click', 'button.btn-warning', (event) => {
-                            event.preventDefault();
-                            const data = reportTable.row($(event.target).closest('tr')).data();
-                            if (data) {
-                                this.viewForm(data.formId);
-                            }
+
+                        $('#reportTable').on('click', '.edit-btn', function(e) {
+                            e.preventDefault();
+                            const formId = $(this).data('id');
+                            self.editForm(formId);
                         });
-                        reportTable.on('click', 'button.btn-primary', (event) => {
-                            event.preventDefault();
-                            const data = reportTable.row($(event.target).closest('tr')).data();
-                            if (data) {
-                                this.editForm(data.formId);
-                            }
+
+                        $('#reportTable').on('click', '.delete-btn', function(e) {
+                            e.preventDefault();
+                            const formId = $(this).data('id');
+                            self.deleteForm(formId);
                         });
-                        reportTable.on('click', 'button.btn-danger', (event) => {
-                            event.preventDefault();
-                            const data = reportTable.row($(event.target).closest('tr')).data();
-                            if (data) {
-                                this.deleteForm(data.formId);
-                            }
+
+                        $('#reportTable').on('click', '.print-btn', function(e) {
+                            e.preventDefault();
+                            const formId = $(this).data('id');
+                            self.openPdfModal(formId);
                         });
-                        reportTable.on('click', 'button.btn-secondary', (event) => {
-                            event.preventDefault();
-                            const data = reportTable.row($(event.target).closest('tr')).data();
-                            if (data) {
-                                this.openPdfModal(data.formId);
-                            }
+
+                        $('#reportTable').on('click', '.qr-btn', function(e) {
+                            e.preventDefault();
+                            const formId = $(this).data('id');
+                            self.openQrModal(formId);
                         });
-                        reportTable.on('click', 'button.btn-info', (event) => {
-                            event.preventDefault();
-                            const data = reportTable.row($(event.target).closest('tr')).data();
-                            if (data) {
-                                this.openQrModal(data.formId);
-                            }
+
+                        $('#reportTable').on('click', '.spec-btn', function(e) {
+                            e.preventDefault();
+                            const formId = $(this).data('id');
+                            self.openSpecModal(formId);
+                        });
+
+                        $('#reportTable').on('click', '.complete-btn', function(e) {
+                            e.preventDefault();
+                            const formId = $(this).data('id');
+                            self.completeForm(formId);
                         });
                     },
                     save() {
@@ -952,6 +1081,54 @@
                             .fail(function (jqXHR, textStatus, errorThrown) {
                                 alert('Error generating QR code: ' + textStatus);
                             });
+                    },
+                    openSpecModal(formId) {
+                        this.currentFormId = formId;
+                        this.specName = '';
+                        this.specDetails = '';
+                        $('#specModal').modal('show');
+                    },
+                    saveSpec() {
+                        const specData = {
+                            specName: this.specName,
+                            specDesc: this.specDetails,
+                            repairForm: {
+                                formId: this.currentFormId
+                            }
+                        };
+
+                        $.post({
+                            url: '[[@{/spec/save}]]',
+                            data: JSON.stringify(specData),
+                            contentType: 'application/json',
+                            success: (response) => {
+                                if(response.success) {
+                                    $('#specModal').modal('hide');
+                                    this.fetchRecord('all'); // Refresh the table
+                                    Swal.fire({
+                                        title: 'Success!',
+                                        text: response.message,  // Use the message from Response object
+                                        icon: 'success',
+                                        confirmButtonText: 'OK'
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: response.message,  // Use error message from Response object
+                                        icon: 'error',
+                                        confirmButtonText: 'OK'
+                                    });
+                                }
+                            },
+                            error: (xhr, status, error) => {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Failed to save specification: ' + (xhr.responseJSON?.message || error),
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                        });
                     }
                 },
             });
