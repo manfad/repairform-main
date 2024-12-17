@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.zxing.BarcodeFormat;
@@ -18,7 +19,8 @@ import jans.repairform.repository.QrCodeRepository;
 @Service
 public class QrCodeService {
 
-    private String qrCodeImagePath = "src/main/resources/qrcodes";
+    @Value("${qr.code.image.path}")
+    private String qrCodeImagePath;
     
     @Autowired 
     private QrCodeRepository qrcodeRepo;

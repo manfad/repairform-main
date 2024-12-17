@@ -42,7 +42,7 @@ public class QrCodeController {
             String baseUrl = request.getScheme() + "://" + 
                           request.getServerName() + ":" + 
                           request.getServerPort() + 
-                          "/repairform/pdf?formid=";
+                          "/repairform/repairform/pdf?formid=";
             
             QrCode qrCode = qrCodeService.qrGenerate(formid, baseUrl);
             
