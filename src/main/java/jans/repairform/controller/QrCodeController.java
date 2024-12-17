@@ -49,8 +49,8 @@ public class QrCodeController {
             response.put("success", true);
             response.put("qrCodeId", qrCode.getId());
             
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
             response.put("success", false);
             response.put("error", "Failed to generate QR code");
         }
@@ -91,21 +91,33 @@ public class QrCodeController {
     @GetMapping("/image/{id}")
     public void getQRCodeImage(@PathVariable Long id, HttpServletResponse response) 
             throws IOException {
-        QrCode qrCode = qrCodeRepo.findById(id)
-                .orElse(null);
-        
-        if (qrCode != null) {
-            Path imagePath = Paths.get(qrCodeImagePath, qrCode.getQrcodePath());
-            if (Files.exists(imagePath)) {
-                response.setContentType("image/png");
-                response.setHeader("Cache-Control", "public, max-age=31536000");
-                Files.copy(imagePath, response.getOutputStream());
-                response.getOutputStream().flush();
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        try {
+            QrCode qrCode = qrCodeRepo.findById(id)
+                    .orElseThrow(() -> new RuntimeException("QR Code not found"));
+            
+            Path imagePath = Paths.get(qrCode.getQrcodePath());
+            System.out.println("Attempting to read QR code from: " + imagePath); // Debug log
+            
+            if (!Files.exists(imagePath)) {
+                System.out.println("File not found at path: " + imagePath); // Debug log
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "QR Code image file not found");
+                return;
             }
-        } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+
+            byte[] imageBytes = Files.readAllBytes(imagePath);
+            response.setContentType("image/png");
+            response.setContentLength(imageBytes.length);
+            response.setHeader("Cache-Control", "public, max-age=31536000");
+            
+            try (var outputStream = response.getOutputStream()) {
+                outputStream.write(imageBytes);
+                outputStream.flush();
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Error processing QR code: " + e.getMessage()); // Debug log
+            e.printStackTrace(); // Debug log
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error processing QR code image");
         }
     }
 
@@ -119,8 +131,8 @@ public class QrCodeController {
             response.put("success", true);
             response.put("qrCodeId", qrCode.getId());
             
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
             response.put("success", false);
             response.put("error", "Failed to generate page QR code");
         }

@@ -11,26 +11,31 @@
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            max-width: 400px;
         }
         .qr-container h4 {
             color: #2196F3;
             margin-bottom: 20px;
         }
         .qr-container img {
-            max-width: 100%;
+            max-width: 250px;
             height: auto;
+            border: 1px solid #eee;
         }
         .error-message {
             color: #f44336;
             margin-top: 10px;
         }
+
     </style>
 </head>
 <body>
     <div class="qr-container">
         <h4 class="text-primary" th:text="${title}">Scan QR Code</h4>
         <div th:if="${qrCodeImage}">
-            <img th:src="${qrCodeImage}" width="250" height="250" alt="QR Code" />
+            <img th:src="@{${qrCodeImage}}" alt="QR Code" />
+         
         </div>
         <div th:if="${error}" class="error-message">
             <p th:text="${error}"></p>

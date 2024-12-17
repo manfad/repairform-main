@@ -35,4 +35,4 @@ build/
 images/
 
 # External QR codes directory
-/opt/repairform/qrcodes/
+/src/main/resources/qrcodes/

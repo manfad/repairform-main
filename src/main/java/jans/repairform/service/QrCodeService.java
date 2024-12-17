@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.zxing.BarcodeFormat;
@@ -19,8 +18,7 @@ import jans.repairform.repository.QrCodeRepository;
 @Service
 public class QrCodeService {
 
-    @Value("${qr.code.image.path}")
-    private String qrCodeImagePath;
+    private String qrCodeImagePath = "src/main/resources/qrcodes";
     
     @Autowired 
     private QrCodeRepository qrcodeRepo;
@@ -32,9 +30,9 @@ public class QrCodeService {
         // Check if QR code already exists for this form ID
         QrCode existingQrCode = qrcodeRepo.findByQrcodeURL(url);
         if (existingQrCode != null) {
-            // Check if the file exists
-            Path existingPath = Paths.get(qrCodeImagePath, existingQrCode.getQrcodePath());
-            if (existingPath.toFile().exists()) {
+            // Check if the file exists using the full path
+            File existingFile = new File(existingQrCode.getQrcodePath());
+            if (existingFile.exists()) {
                 return existingQrCode;
             }
             // If file doesn't exist, we'll regenerate it with the same filename
@@ -55,6 +53,7 @@ public class QrCodeService {
         // Generate filename based on form ID for consistency
         String fileName = "qr_" + formId + ".png";
         Path path = Paths.get(qrCodeImagePath, fileName);
+        String fullPath = path.toString(); // Get the complete path
         
         // Save QR code image to file
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
@@ -65,13 +64,13 @@ public class QrCodeService {
         
         if (existingQrCode != null) {
             // Update existing record
-            existingQrCode.setQrcodePath(fileName);
+            existingQrCode.setQrcodePath(fullPath);
             return qrcodeRepo.save(existingQrCode);
         } else {
             // Create new record
             QrCode qrCode = new QrCode();
             qrCode.setQrcodeURL(url);
-            qrCode.setQrcodePath(fileName);
+            qrCode.setQrcodePath(fullPath);
             return qrcodeRepo.save(qrCode);
         }
     }
@@ -80,9 +79,9 @@ public class QrCodeService {
         // First check if QR code already exists for this URL
         QrCode existingQrCode = qrcodeRepo.findByQrcodeURL(pageUrl);
         if (existingQrCode != null) {
-            // Check if file exists
-            Path existingPath = Paths.get(qrCodeImagePath, existingQrCode.getQrcodePath());
-            if (existingPath.toFile().exists()) {
+            // Check if file exists using the full path
+            File existingFile = new File(existingQrCode.getQrcodePath());
+            if (existingFile.exists()) {
                 return existingQrCode;
             }
         }
@@ -102,6 +101,7 @@ public class QrCodeService {
         // Generate filename using URL hash to ensure same URL gets same filename
         String fileName = "qr_" + Math.abs(pageUrl.hashCode()) + ".png";
         Path path = Paths.get(qrCodeImagePath, fileName);
+        String fullPath = path.toString(); // Get the complete path
         
         // Save QR code image to file
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
@@ -112,13 +112,13 @@ public class QrCodeService {
         
         if (existingQrCode != null) {
             // Update existing record with new file path
-            existingQrCode.setQrcodePath(fileName);
+            existingQrCode.setQrcodePath(fullPath);
             return qrcodeRepo.save(existingQrCode);
         } else {
             // Create new record
             QrCode qrCode = new QrCode();
             qrCode.setQrcodeURL(pageUrl);
-            qrCode.setQrcodePath(fileName);
+            qrCode.setQrcodePath(fullPath);
             return qrcodeRepo.save(qrCode);
         }
     }
