@@ -82,12 +82,17 @@
         </nav>
 
         <div class="container mt-4">
-            <div class="row">
+            <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
-                    <button class="btn btn-dark mb-3" type="submit" @click="qrcode">QR Code</button>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-dark mb-3" type="submit" @click="qrcode">QR Code</button>
+                        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addReportModal">Add New Report</button>
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addReportModal">Add New Report</button>
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="customSearch" placeholder="Search...">
+                    </div>
                 </div>
             </div>
             <table class="table" id="reportTable">
@@ -732,7 +737,12 @@
                                 $(row).on('remove', function() {
                                     $(this).popover('dispose');
                                 });
-                            }
+                            },
+                            "dom": 'lrtip'
+                        });
+
+                        $('#customSearch').keyup(function() {
+                            reportTable.search($(this).val()).draw();
                         });
 
                         $('#searchDateModal').modal('hide');
@@ -1066,21 +1076,21 @@
                            
                     },
                     qrcode() {
-                        $.post(` [[@{/qrcode/generate-page-qr}]]?formid=`, {
+                        $.post(`[[@{/qrcode/generate-page-qr}]]`, {
                             pageUrl: window.location.href
                         })
-                            .done(function (response) {
-                                if (response.success) {
-                                    let qrWindow = window.open(`[[@{/qrcode/view/page/}]]` + response.qrCodeId,
-                                        'QRCode',
-                                        'width=300,height=400');
-                                } else {
-                                    alert(response.error || 'Failed to generate QR code');
-                                }
-                            })
-                            .fail(function (jqXHR, textStatus, errorThrown) {
-                                alert('Error generating QR code: ' + textStatus);
-                            });
+                        .done(function (response) {
+                            if (response.success) {
+                                let qrWindow = window.open(`[[@{/qrcode/view/page/}]]` + response.qrCodeId,
+                                    'QRCode',
+                                    'width=300,height=400');
+                            } else {
+                                alert(response.error || 'Failed to generate QR code');
+                            }
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                            alert('Error generating QR code: ' + textStatus);
+                        });
                     },
                     openSpecModal(formId) {
                         this.currentFormId = formId;
@@ -1129,6 +1139,24 @@
                                 });
                             }
                         });
+                    },
+                    handleSearch(event) {
+                        const searchValue = event.target.value;
+                        let reportTable = $('#reportTable').DataTable();
+                        
+                        if (navigator.onLine) {
+                            // If online, let DataTables handle the search
+                            reportTable.search(searchValue).draw();
+                        } else {
+                            // If offline, do client-side filtering
+                            reportTable.rows().every(function() {
+                                const rowData = this.data();
+                                const visible = Object.values(rowData).some(value => 
+                                    String(value).toLowerCase().includes(searchValue.toLowerCase())
+                                );
+                                this.nodes().to$().toggle(visible);
+                            });
+                        }
                     }
                 },
             });

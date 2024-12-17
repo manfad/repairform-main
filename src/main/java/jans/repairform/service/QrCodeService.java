@@ -53,7 +53,7 @@ public class QrCodeService {
         }
         
         // Generate filename based on form ID for consistency
-        String fileName = "qr_form_" + formId + ".png";
+        String fileName = "qr_" + formId + ".png";
         Path path = Paths.get(qrCodeImagePath, fileName);
         
         // Save QR code image to file
@@ -71,6 +71,53 @@ public class QrCodeService {
             // Create new record
             QrCode qrCode = new QrCode();
             qrCode.setQrcodeURL(url);
+            qrCode.setQrcodePath(fileName);
+            return qrcodeRepo.save(qrCode);
+        }
+    }
+
+    public QrCode generatePageQrCode(String pageUrl) throws Exception {
+        // First check if QR code already exists for this URL
+        QrCode existingQrCode = qrcodeRepo.findByQrcodeURL(pageUrl);
+        if (existingQrCode != null) {
+            // Check if file exists
+            Path existingPath = Paths.get(qrCodeImagePath, existingQrCode.getQrcodePath());
+            if (existingPath.toFile().exists()) {
+                return existingQrCode;
+            }
+        }
+        
+        // Generate new QR code
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = qrCodeWriter.encode(pageUrl, BarcodeFormat.QR_CODE, 250, 250);
+        
+        // Create directory if it doesn't exist
+        File directory = new File(qrCodeImagePath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+            directory.setReadable(true, false);
+            directory.setExecutable(true, false);
+        }
+        
+        // Generate filename using URL hash to ensure same URL gets same filename
+        String fileName = "qr_" + Math.abs(pageUrl.hashCode()) + ".png";
+        Path path = Paths.get(qrCodeImagePath, fileName);
+        
+        // Save QR code image to file
+        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+        
+        // Make the file readable by the web server
+        File qrFile = path.toFile();
+        qrFile.setReadable(true, false);
+        
+        if (existingQrCode != null) {
+            // Update existing record with new file path
+            existingQrCode.setQrcodePath(fileName);
+            return qrcodeRepo.save(existingQrCode);
+        } else {
+            // Create new record
+            QrCode qrCode = new QrCode();
+            qrCode.setQrcodeURL(pageUrl);
             qrCode.setQrcodePath(fileName);
             return qrcodeRepo.save(qrCode);
         }

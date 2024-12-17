@@ -111,16 +111,16 @@ public class QrCodeController {
 
     @PostMapping("/generate-page-qr")
     public @ResponseBody Map<String, Object> generatePageQRCode(
-            @RequestParam String pageUrl,
-            @RequestParam String id) {
+            @RequestParam String pageUrl) {
         Map<String, Object> response = new HashMap<>();
         try {
-            QrCode qrCode = qrCodeService.qrGenerate(id, pageUrl);
+            QrCode qrCode = qrCodeService.generatePageQrCode(pageUrl);
             
             response.put("success", true);
             response.put("qrCodeId", qrCode.getId());
             
         } catch (Exception e) {
+            e.printStackTrace();
             response.put("success", false);
             response.put("error", "Failed to generate page QR code");
         }
